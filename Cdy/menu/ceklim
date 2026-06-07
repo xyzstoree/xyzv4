@@ -1,0 +1,67 @@
+#!/bin/bash
+
+g="\e[92;1m"
+RED="\033[31m"
+NC='\033[0m'
+y='\033[1;93m'
+gg='\e[1;77m'
+ungu="\033[0;35m"
+clear
+touch /root/.system
+data1=( `awk -F: '$3 >= 1000 && $1 != "nobody" {print $1}' /etc/passwd `)
+for user in "${data1[@]}"
+do
+iplimit1=$(cat /etc/kyt/limit/ssh/ip/$user)
+if [[ $iplimit1 = "" ]]; then
+echo "2" > /etc/kyt/limit/ssh/ip/$user
+else
+echo -ne
+fi
+done
+clear
+echo -e "\033[5;36m ———————————————————————————————————————————————\033[0m"
+function center_text() {
+    local color="$1"
+    local text="$2"
+    local width=50  # Sesuaikan dengan panjang baris yang diinginkan
+    local len=${#text}
+    local spaces=$(( (width - len) / 2 ))
+
+    printf "${color}%${spaces}s%s\033[0m\n" "" "$text"
+}
+
+center_text "${g}" "USER LOGIN SSH"
+#echo -e "            ️ ${g}USER LOGIN SSH${NC}  ️"
+echo -e "\033[5;36m ———————————————————————————————————————————————\033[0m"
+echo -e "    ${ungu} USERNAME    LIMIT IP    LOGIN IP ${NC}"
+mulog=$(bash /usr/bin/cek-ssh)
+data=( `awk -F: '$3 >= 1000 && $1 != "nobody" {print $1}' /etc/passwd`)
+for user in "${data[@]}"
+do
+cekcek=$(echo -e "$mulog" | grep -wE $user | wc -l)
+if [[ $cekcek -gt 0 ]]; then
+# iplimit=$(cat /etc/kyt/limit/ssh/ip/$user)
+iplimit=$(grep -w "$user" /etc/ssh/.ssh.db | awk '{print $5}')
+printf "  %-13s %-7s %-8s %2s\n" "     ${user}        ${iplimit} IP        ${cekcek} IP"
+echo "slot" >> /root/.system
+else
+echo > /dev/null
+fi
+echo send_log > /dev/null
+done
+aktif=$(cat /root/.system | wc -l)
+echo -e "\033[5;36m ———————————————————————————————————————————————\033[0m"
+function center_text() {
+    local color="$1"
+    local text="$2"
+    local width=50  # Sesuaikan dengan panjang baris yang diinginkan
+    local len=${#text}
+    local spaces=$(( (width - len) / 2 ))
+
+    printf "${color}%${spaces}s%s\033[0m\n" "" "$text"
+}
+
+center_text "${g}" "$aktif User Online"
+#echo -e "            "
+echo -e "\033[5;36m ———————————————————————————————————————————————\033[0m"
+sed -i "d" /root/.system

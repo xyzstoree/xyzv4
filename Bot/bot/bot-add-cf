@@ -1,0 +1,185 @@
+#!/bin/bash
+Green="\e[92;1m"
+RED="\033[31m"
+YELLOW="\033[33m"
+BLUE="\033[36m"
+FONT="\033[0m"
+GREENBG="\033[42;37m"
+REDBG="\033[41;37m"
+OK="--->${FONT}"
+ERROR="${RED}[ERROR]${FONT}"
+GRAY="\e[1;30m"
+NC='\e[0m'
+red='\e[1;31m'
+green='\e[0;32m'
+DF='\e[39m'
+Bold='\e[1m'
+Blink='\e[5m'
+yell='\e[33m'
+red='\e[31m'
+green='\e[32m'
+blue='\e[34m'
+PURPLE='\e[35m'
+cyan='\e[36m'
+Lred='\e[91m'
+Lgreen='\e[92m'
+Lyellow='\e[93m'
+NC='\e[0m'
+GREEN='\033[0;32m'
+ORANGE='\033[0;33m'
+LIGHT='\033[0;37m'
+grenbo="\e[92;1m"
+red() { echo -e "\\033[32;1m${*}\\033[0m"; }
+# Getting
+CHATID=$(grep -E "^#bot# " "/etc/bot/.bot.db" | cut -d ' ' -f 3)
+KEY=$(grep -E "^#bot# " "/etc/bot/.bot.db" | cut -d ' ' -f 2)
+export TIME="10"
+export URL="https://api.telegram.org/bot$KEY/sendMessage"
+clear
+# Valid Script
+ipsaya=$(cat /usr/bin/ipsave)
+data_server=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Date | sed -e 's/< Date: //')
+date_list=$(date +"%Y-%m-%d" -d "$data_server")
+data_ip="https://raw.githubusercontent.com/xyzstoree/izin/main/ip-admin"
+checking_sc() {
+  useexp=$(wget -qO- $data_ip | grep $ipsaya | awk '{print $3}')
+  if [[ $date_list < $useexp ]]; then
+    echo -ne
+  else
+    echo -e "\033[1;93m────────────────────────────────────────────\033[0m"
+    echo -e "     ANDA HARUS MENDAFTAR DAHULU UNTUK MENJADI RESSEL       "
+    echo -e "\033[1;93m────────────────────────────────────────────\033[0m"
+    echo -e "            ${RED}DAFTAR DULU DEK !"
+    echo -e "   \033[0;33mYour VPS $ipsaya \033[0;33mHas been Banned"
+    echo -e "     \033[0;33mBuy access permissions for scripts"
+    echo -e "             \033[0;33mContact Admin :"
+    echo -e "      WhatsApp wa.me/6281327393959"
+    echo -e "\033[1;93m────────────────────────────────────────────\033[0m"
+    exit
+  fi
+}
+checking_sc
+
+# Menanyakan pengguna untuk memilih domain
+echo "Pilih domain yang ingin Anda gunakan:"
+echo -e "--------------"
+echo "1. sgpremium.my.id"
+echo "2. idpremium.my.id"
+echo "3. newsctunnel.me"
+echo "4. arisctunnel.me"
+echo "5. aristore.me"
+echo -e "--------------"
+read -rp "Masukkan pilihan Anda (1 atau 5): " -e domain_choice
+
+# Menentukan domain berdasarkan pilihan pengguna
+if [ "$domain_choice" -eq 1 ]; then
+    DOMAIN="sgpremium.my.id"
+    CF_ID="arivpnstore@gmail.com"
+    CF_KEY="10e83b99d26e31821ad29b2f1d25f5fbbcdac"
+elif [ "$domain_choice" -eq 2 ]; then
+    DOMAIN="idpremium.my.id"
+    CF_ID="arivpnstore@gmail.com"
+    CF_KEY="10e83b99d26e31821ad29b2f1d25f5fbbcdac"
+elif [ "$domain_choice" -eq 3 ]; then
+    DOMAIN="newsctunnel.me"
+    CF_ID="aribuncar285@gmail.com"
+    
+    CF_KEY="3a9c22d2f262547b15d58da5b93e884985edb"
+elif [ "$domain_choice" -eq 4 ]; then
+    DOMAIN="arisctunnel.me"
+    CF_ID="aribuncar285@gmail.com"
+    CF_KEY="3a9c22d2f262547b15d58da5b93e884985edb"
+elif [ "$domain_choice" -eq 5 ]; then
+    DOMAIN="aristore.me"
+    CF_ID="aribuncar285@gmail.com"
+    CF_KEY="3a9c22d2f262547b15d58da5b93e884985edb"
+else
+    echo "Pilihan tidak valid."
+    exit 1
+fi
+clear
+echo "Cloudflare with Pointing"
+echo "Enter your Host and IPVPS"
+
+# Meminta pengguna untuk memasukkan subdomain dan IP VPS
+read -rp "HOST: " -e sub
+read -rp "IPVPS: " -e IP
+
+# Menentukan subdomain lengkap
+SUB_DOMAIN="${sub}.${DOMAIN}"
+
+# Kredensial Cloudflare
+#CF_ID="arivpnstore@gmail.com"
+#CF_KEY="10e83b99d26e31821ad29b2f1d25f5fbbcdac"
+
+set -euo pipefail
+
+echo "Memperbarui DNS untuk ${SUB_DOMAIN}..."
+
+# Mendapatkan Zone ID
+ZONE=$(curl -sLX GET "https://api.cloudflare.com/client/v4/zones?name=${DOMAIN}&status=active" \
+    -H "X-Auth-Email: ${CF_ID}" \
+    -H "X-Auth-Key: ${CF_KEY}" \
+    -H "Content-Type: application/json" | jq -r .result[0].id)
+
+if [ -z "$ZONE" ]; then
+    echo "Error: Zone ID tidak ditemukan"
+    exit 1
+fi
+
+# Mendapatkan DNS Record ID
+RECORD=$(curl -sLX GET "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records?name=${SUB_DOMAIN}" \
+    -H "X-Auth-Email: ${CF_ID}" \
+    -H "X-Auth-Key: ${CF_KEY}" \
+    -H "Content-Type: application/json" | jq -r .result[0].id)
+
+# Membuat DNS record jika belum ada
+if [[ "${#RECORD}" -le 10 ]]; then
+    RECORD=$(curl -sLX POST "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records" \
+        -H "X-Auth-Email: ${CF_ID}" \
+        -H "X-Auth-Key: ${CF_KEY}" \
+        -H "Content-Type: application/json" \
+        --data '{"type":"A","name":"'${SUB_DOMAIN}'","content":"'${IP}'","ttl":120,"proxied":false}' | jq -r .result.id)
+fi
+
+if [ -z "$RECORD" ]; then
+    echo "Error: Pembuatan catatan DNS gagal"
+    exit 1
+fi
+#UBAH domain
+#INSTALL=""
+# Memperbarui DNS record yang ada
+RESULT=$(curl -sLX PUT "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records/${RECORD}" \
+    -H "X-Auth-Email: ${CF_ID}" \
+    -H "X-Auth-Key: ${CF_KEY}" \
+    -H "Content-Type: application/json" \
+    --data '{"type":"A","name":"'${SUB_DOMAIN}'","content":"'${IP}'","ttl":120,"proxied":false}')
+
+if [ "$(echo $RESULT | jq -r .success)" != "true" ]; then
+    echo "Error: Pembaruan catatan DNS gagal"
+    exit 1
+fi
+
+fix_haproxy() {
+change-domain-admin
+}
+
+echo "Host : ${SUB_DOMAIN}"
+echo "DONE!!!"
+echo "Do you want to fix Domain and Haproxy?"
+read -p "Choose [y/n]: " response
+
+case $response in
+    y|Y)
+ssh root@$IP "rm -rf /etc/xray/domain && rm -rf /root/domain && rm -rf /var/lib/kyt/ipvps.conf && echo "${SUB_DOMAIN}" > /etc/xray/domain && echo ${SUB_DOMAIN} > /root/domain && echo "IP=${SUB_DOMAIN}" > /var/lib/kyt/ipvps.conf"
+fix_haproxy
+        ;;
+    n|N)
+        echo "Skipping Domain and Haproxy fix."
+        ;;
+    *)
+        echo "Invalid option. Please choose 'y' or 'n'."
+        ;;
+esac
+
+# rm -f /root/cf.sh # Opsional: Dihapus untuk keamanan

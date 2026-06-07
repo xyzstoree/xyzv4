@@ -1,0 +1,130 @@
+#!/bin/bash
+
+BlueCyan='\e[5;36m'
+Xark='\e[0m'
+ungu='\033[0;35m'
+yellow='\e[33m'
+WhiteBe='\e[5;37m'
+GreenBe='\e[5;32m'
+BlueCyan='\e[5;36m'
+Xark='\e[0m'
+BG_BLU="\033[44;1m" # BG BIRU
+GREN="\033[92m"
+clear
+function xTROJAN() {
+  echo -e  " ${BG_BLU}               XRAY TROJAN              ${Xark}"
+}
+function baris_panjang() {
+  echo -e "${BlueCyan} ———————————————————————————————————————${Xark}"
+}
+function ATAS() {
+  echo -e   " ${BG_BLU}                 TROJAN                ${Xark}"
+}
+function UTILITIES() {
+  echo -e   " ${BG_BLU}                UTILITIES              ${Xark}"
+}
+
+# . 1
+function Create_Account() {
+  bash /usr/bin/add-tro
+}
+# . 2
+function Create_Trial() {
+  bash /usr/bin/trial-tro
+}
+# . 3
+function Delete_Account() {
+  bash /usr/bin/del-tro
+}
+# . 4
+function List_Member() {
+  bash /usr/bin/member-tro
+}
+# . 5
+function Renew_Account() {
+  bash /usr/bin/renew-tro
+}
+# . 6
+function Changes_Limit() {
+  bash /usr/bin/ganti-ip-trojan
+}
+
+# . 11
+function Changes_Limit_Quota() {
+  bash /usr/bin/trojan-qouta
+}
+# . 7 
+function Check_Account() {
+  bash /usr/bin/cek-tro
+}
+# . 8 
+function Check_Details_Account() {
+  bash /usr/bin/check-tro
+}
+
+# . 9
+function Lock_Account() {
+  bash /usr/bin/lock-tr
+}
+
+# . 10
+function Unlock_Account() {
+  bash /usr/bin/unlock-tr
+}
+
+# . 11
+function Recovery_Trojan() {
+  bash /usr/bin/recover-tr
+}
+
+# Banner
+function Banner() {
+  baris_panjang
+  ATAS
+  baris_panjang
+}
+
+# Menu
+function Menu_Features() {
+  echo -e "\033[0;37m  1.)  Check Users Login"
+  echo -e "  2.)  Create Account Trojan"
+  echo -e "  3.)  Trial Account Trojan"
+  echo -e "  4.)  Delete Account Trojan"
+  echo -e "  5.)  Renew Account Trojan"
+  baris_panjang
+  UTILITIES               
+  baris_panjang
+  echo -e "\033[0;37m  6.)  List Member Trojan" 
+  echo -e "  7.)  Check Config Account"
+  echo -e "  8.)  Recovery Account"
+  echo -e "  9.)  Edit Limit IP Account"
+  echo -e " 10.)  Edit Limit Bandwidth Account"
+  echo -e " 11.)  Lock Account"
+  echo -e " 12.)  Unlock Account"
+  echo -e " 13.)  Back to Menu"
+  echo -e "  x.)  Exit"
+  echo -e " "
+  baris_panjang
+  baris_panjang
+}
+
+Banner
+Menu_Features
+read -p "Select From Options [1-14 or x] :  " Ltt
+case $Ltt in
+1) clear ; Check_Account ;;
+2) clear ; Create_Account ;;
+3) clear ; Create_Trial ;;
+4) clear ; Delete_Account ;;
+5) clear ; Renew_Account ;;
+6) clear ; List_Member ;;
+7) clear ; Check_Details_Account ;;
+8) clear ; Recovery_Trojan ;;
+9) clear ; Changes_Limit ;;
+10) clear ; Changes_Limit_Quota ;;
+11) clear ; Lock_Account ;;
+12) clear ; Unlock_Account ;;
+13) clear ; menu ;;
+*) m-tro ;;
+x) exit ;;
+esac

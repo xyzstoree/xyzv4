@@ -1,0 +1,115 @@
+#!/bin/bash
+set -euo pipefail
+
+REPOS="https://raw.githubusercontent.com/xyzstoree/xyzv4/main/"
+
+# =========================
+# CONFIG (AUTO)
+# =========================
+gen_slowdns_domain() {
+  # Ambil domain utama dari /etc/xray/domain
+  # Contoh: biznet6.rajaserverpremium.web.id  (atau domain utama kamu)
+  DOMAIN_PATH="$(cat /etc/xray/domain 2>/dev/null || true)"
+  if [[ -z "${DOMAIN_PATH}" ]]; then
+    echo "❌ /etc/xray/domain kosong. Isi dulu domain utama kamu."
+    exit 1
+  fi
+
+  # Ambil subdomain pertama (label pertama)
+  # contoh: biznet6
+  SUB="$(echo "$DOMAIN_PATH" | cut -d "." -f1)"
+
+  # Base domain = buang label pertama, ambil sisanya
+  # contoh: rajaserverpremium.web.id
+  BASE_DOMAIN="$(echo "$DOMAIN_PATH" | cut -d "." -f2-)"
+  if [[ -z "${BASE_DOMAIN}" ]]; then
+    echo "❌ Gagal ambil BASE_DOMAIN dari: ${DOMAIN_PATH}"
+    exit 1
+  fi
+
+  # Domain untuk SlowDNS (delegasi)
+  # contoh: biznet6.rajaserverpremium.web.id
+  SLOWDNS_DOMAIN="${SUB}.${BASE_DOMAIN}"
+
+  # NS host untuk delegasi
+  # contoh: ns-biznet6.rajaserverpremium.web.id
+  NS_DOMAIN="ns-${SLOWDNS_DOMAIN}"
+
+  # IP publik VPS
+  IP="$(curl -4 -fsS --max-time 10 https://ipwho.is/ | sed -nE 's/.*"ip"[[:space:]]*:[[:space:]]*"([^"]+)".*/\1/p' | head -n1)"
+  if [[ -z "${IP}" || "${IP}" == "N/A" ]]; then
+    IP="$(curl -4 -fsS --max-time 10 https://ipinfo.io/ip || true)"
+  fi
+  if [[ -z "${IP}" ]]; then
+    echo "❌ Gagal ambil IP publik VPS."
+    exit 1
+  fi
+
+  mkdir -p /etc/slowdns
+  echo "${SLOWDNS_DOMAIN}" > /etc/slowdns/domain
+  echo "${NS_DOMAIN}"      > /etc/slowdns/ns
+  echo "${IP}"             > /etc/slowdns/ip
+
+  echo "=============================================="
+  echo "✅ SLOWDNS DOMAIN  : ${SLOWDNS_DOMAIN}"
+  echo "✅ NS DOMAIN       : ${NS_DOMAIN}"
+  echo "✅ VPS IP          : ${IP}"
+  echo "=============================================="
+  echo ""
+  echo "⚠️  SET DNS MANUAL (di panel DNS domain kamu):"
+  echo ""
+  echo "1) A Record"
+  echo "   Name  : ${NS_DOMAIN}"
+  echo "   Type  : A"
+  echo "   Value : ${IP}"
+  echo ""
+  echo "2) NS Record (delegasi)"
+  echo "   Name    : ${SLOWDNS_DOMAIN}"
+  echo "   Type    : NS"
+  echo "   Value   : ${NS_DOMAIN}"
+  echo ""
+  echo "Catatan: Tunggu propagasi DNS (biasanya 1-10 menit, kadang lebih)."
+  echo "=============================================="
+  echo ""
+}
+
+# =========================
+# INSTALL DNSTT
+# =========================
+setup_dnstt() {
+  mkdir -p /etc/slowdns
+  cd /etc/slowdns
+
+  # download binary
+  wget -qO dnstt-server "${REPOS}Fls/dnstt-server"
+  wget -qO dnstt-client "${REPOS}Fls/dnstt-client"
+  chmod +x dnstt-server dnstt-client
+
+  # generate key
+  ./dnstt-server -gen-key -privkey-file server.key -pubkey-file server.pub
+
+  # systemd service
+  wget -qO /etc/systemd/system/client.service "${REPOS}Fls/client"
+  wget -qO /etc/systemd/system/server.service "${REPOS}Fls/server"
+
+  # pakai domain slowdns (delegasi) untuk service
+  # (kalau repo kamu memang pakai placeholder 'xxxx')
+  sed -i "s/xxxx/$(cat /etc/slowdns/ns)/g" /etc/systemd/system/client.service
+  sed -i "s/xxxx/$(cat /etc/slowdns/ns)/g" /etc/systemd/system/server.service
+
+  systemctl daemon-reload
+  systemctl enable server.service client.service >/dev/null 2>&1 || true
+  systemctl restart server.service client.service || true
+
+  echo ""
+  echo "✅ DNSTT/SlowDNS installed."
+  echo "Cek status:"
+  echo "  systemctl status server.service --no-pager"
+  echo "  systemctl status client.service --no-pager"
+  echo ""
+  echo "Domain yang dipakai service:"
+  echo "  $(cat /etc/slowdns/ns)"
+}
+
+gen_slowdns_domain
+setup_dnstt

@@ -1,0 +1,30 @@
+#!/bin/bash
+echo -e '\033[1;32mwaiting...\e[0m'
+sudo apt-get update >/dev/null 2>&1
+sudo apt-get install parallel -y >/dev/null 2>&1
+# Deteksi jumlah inti CPU
+CPU_CORES=$(nproc --all)
+
+# Fungsi untuk menjalankan tugas berat (contoh: komputasi sederhana)
+heavy_task() {
+    echo "Thread $1 mulai..."
+    # Menjalankan loop besar untuk mensimulasikan beban CPU
+    for i in {1..1000000}; do :; done
+    echo "Thread $1 selesai."
+}
+
+export -f heavy_task
+
+# Simpan nama file log
+LOG_FILE="thread_performance.log"
+
+# Mulai pencatatan waktu
+echo "Waktu Mulai: $(date)" > $LOG_FILE
+
+# Jalankan tugas secara paralel
+seq $CPU_CORES | parallel -j $CPU_CORES heavy_task {} >> $LOG_FILE 2>&1
+
+# Selesai pencatatan waktu
+echo "Waktu Selesai: $(date)" >> $LOG_FILE
+
+echo "Semua thread selesai. Data performa disimpan di $LOG_FILE."

@@ -1,0 +1,189 @@
+#!/bin/bash
+y='\033[1;93m'
+c="\033[0;36m"
+g="\e[92;1m"
+r="\033[1;31m"
+NC='\e[0m'
+gray="\e[1;30m"
+Blue="\033[1;36m"
+GREEN='\033[0;32m'
+grenbo="\033[1;95m"
+yell='\e[33m'
+BGX="\033[42m"
+END='\e[0m'
+bc="\e[5;36m"
+ungu='\033[0;35m'
+Green_background="\033[42;37m"
+Red_background="\033[41;37m"
+Suffix="\033[0m"
+NC='\e[0m'
+BlueCyan='\e[5;36m'
+Xark='\e[0m'
+ungu='\033[35m'
+yellow='\e[33m'
+WhiteBe='\e[5;37m'
+GreenBe='\e[5;32m'
+BlueCyan='\e[5;36m'
+White="\033[97;1m"
+Green="\033[92;1m"
+Cyan="\033[96;1m"
+Xark='\e[0m'
+BG_BLU="\033[44;1m" # BG BIRU
+
+clear
+function ARI_Banner() {
+baris_panjang
+NAMASC="ARISCTUNNEL V4"
+function center_text() {
+    local text="$1"
+    local width=50  # Sesuaikan dengan panjang baris yang diinginkan
+
+    # Hapus kode warna untuk menghitung panjang sebenarnya dari teks
+    local plain_text=$(echo -e "$text" | sed 's/\x1b\[[0-9;]*m//g')
+    local len=${#plain_text}
+    local spaces=$(( (width - len) / 2 ))
+
+    # Tampilkan teks dengan warna dan centering yang benar
+    printf "%${spaces}s%s\033[0m\n" "" "$(echo -e "$text")"
+}
+# Kombinasi warna untuk ".::." dan "ARISCTUNNEL V4"
+formatted_text="\e[36m.::.\033[0;35m $NAMASC \e[36m.::."
+# Tampilkan teks yang diformat
+center_text "$formatted_text"
+baris_panjang
+}
+
+function baris_panjang() {
+  echo -e "${BlueCyan} ———————————————————————————————————————${Xark}"
+}
+function ATAS() {
+  echo -e     "${ungu}                FEATURES               ${Xark} "
+}
+
+function  FIXX() {
+  echo -e  " ${BG_BLU}               MENU FIXX               ${Xark}"
+}
+
+function  ADMIN() {
+  echo -e  " ${BG_BLU}               ADMIN AKSES             ${Xark}"
+}
+
+function  CLEAR() {
+  echo -e  " ${BG_BLU}               MENU CLEAR              ${Xark}"
+}
+
+
+function  INFORMATION() {
+  echo -e  " ${BG_BLU}              INFORMATION              ${Xark}"
+}
+
+
+function  OTHER() {
+  echo -e  " ${BG_BLU}                OTHER                  ${Xark}"
+}
+
+
+function Create_Bot_Notif() {
+  create-bot-notif
+}
+
+
+function Info_Port() {
+  bash /usr/bin/prot
+}
+
+# Banner 
+function Banner(){
+clear
+baris_panjang
+ATAS
+baris_panjang
+}
+
+
+function Menu_Lambofgod() {
+baris_panjang
+echo -e ""
+echo -e "\033[0;37m  1.) Running Service    "  
+echo -e "  2.) Restart Service    " 
+echo -e "  3.) Auto Reboot	  " 
+echo -e "  4.) Monitoring         " 
+echo -e "  5.) SpeedTest 		  "
+echo -e "  6.) Delete All Account Exp "
+baris_panjang
+FIXX
+baris_panjang
+echo -e "\033[0;37m  7.) Change Banner      "  
+echo -e "  8.) Change Domain      "  
+echo -e "  9.) Change Domain NS   " 
+echo -e " 10.) Fixx Haproxy       "  
+echo -e " 11.) Fixx Nginx         "  
+echo -e " 12.) Fixx WS ePRO       "  
+echo -e " 13.) Fixx Domain        "  
+echo -e " 14.) Fixx Xray          "  
+baris_panjang
+CLEAR
+baris_panjang
+echo -e "\033[0;37m 15.) Clear Cache      "
+echo -e " 16.) Clear Logs       "
+echo -e " 17.) Clear Cache File "
+baris_panjang
+INFORMATION
+baris_panjang
+echo -e "\033[0;37m 18.) Info Service Port  "
+echo -e " 19.) Information System "
+echo -e " 20.) List Open Sourc & List Sewa Script"
+baris_panjang
+OTHER
+baris_panjang
+echo -e "\033[0;37m 21.) Anti-DDoS Protection "
+echo -e " 22.) Script Other  "
+echo -e " 23.) Limit Speed  "
+echo -e " 24.) Limit-on-off XRAY  "
+echo -e " 25.) Boster CPU (multi-threading)"
+echo -e " 26.) Back to Menu"
+echo -e "  x . EXIT "
+echo -e ""
+baris_panjang
+echo -e ""
+
+}
+
+function Select_Menu() {
+read -p "Select From Options [1-22 or x] :  " NB
+case $NB in
+1) clear ; bash /usr/bin/run ;;
+2) clear ; bash /usr/bin/reset ;;
+3) clear ; bash /usr/bin/autoreboot ;;
+4) clear ; gotop ;;
+5) clear ; bash /usr/bin/speedtest ;;
+6) clear ; bash /usr/bin/xp ;;
+7) clear ; nano /etc/banner.txt ;;
+8) clear ; bash /usr/bin/change-domain ;;
+9) clear ; bash /usr/bin/change-domain-selowdns ;;
+10) clear ; bash /usr/bin/fixhap ;;
+11) clear ; bash /usr/bin/fixngix ;;
+12) clear ; bash /usr/bin/fixws-epro ;;
+13) clear ; bash /usr/bin/fixcert ;;
+14) clear ; bash /usr/bin/fixxray ;;
+15) clear ; bash /usr/bin/clearcache ;;
+16) clear ; bash /usr/bin/clearlog ;;
+17) clear ; bash /usr/bin/delet-cache-file ;;
+18) clear ; Info_Port ;;
+19) clear ; bash /usr/bin/about ;;
+20) clear ; bash /usr/bin/sc ;;
+21) clear ; bash /usr/bin/anti-ddos ;;
+22) clear ; bash /usr/bin/m-panel ;;
+23) clear ; bash /usr/bin/limitspeed ;;
+24) clear ; bash /usr/bin/limit-on-off ;;
+25) clear ; bash /usr/bin/run_multi_threading ;;
+26) clear ; menu ;;
+x) exit ;;
+*) m-ftr ;;
+esac
+}
+
+
+Banner
+Menu_Lambofgod
+Select_Menu

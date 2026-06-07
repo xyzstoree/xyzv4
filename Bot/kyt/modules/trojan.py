@@ -1,0 +1,358 @@
+from kyt import *
+
+@bot.on(events.CallbackQuery(data=b'create-trojan'))
+async def create_trojan(event):
+	async def create_trojan_(event):
+		async with bot.conversation(chat) as user:
+			await event.respond('**Username:**')
+			user = user.wait_event(events.NewMessage(incoming=True, from_users=sender.id))
+			user = (await user).raw_text
+		async with bot.conversation(chat) as pw:
+			await event.respond("**Quota:**")
+			pw = pw.wait_event(events.NewMessage(incoming=True, from_users=sender.id))
+			pw = (await pw).raw_text
+		async with bot.conversation(chat) as pw1:
+			await event.respond("**Limit-ip:**")
+			pw1 = pw1.wait_event(events.NewMessage(incoming=True, from_users=sender.id))
+			pw1 = (await pw1).raw_text
+		async with bot.conversation(chat) as exp:
+			await event.respond("**Expaired:**")
+			exp = exp.wait_event(events.NewMessage(incoming=True, from_users=sender.id))
+			exp = (await exp).raw_text
+
+		time.sleep(1)
+		await event.edit("`Processing Crate Premium Account`")
+		time.sleep(1)
+		await event.edit("`Processing... 0%\n▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `")
+		time.sleep(1)
+		await event.edit("`Processing... 4%\n█▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `")
+		time.sleep(0)
+		await event.edit("`Processing... 8%\n██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `")
+		time.sleep(0)
+		await event.edit("`Processing... 20%\n█████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `")
+		time.sleep(0)
+		await event.edit("`Processing... 36%\n█████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `")
+		time.sleep(1)
+		await event.edit("`Processing... 52%\n█████████████▒▒▒▒▒▒▒▒▒▒▒▒ `")
+		time.sleep(1)
+		await event.edit("`Processing... 84%\n█████████████████████▒▒▒▒ `")
+		time.sleep(0)
+		await event.edit("`Processing... 100%\n█████████████████████████ `")
+		time.sleep(1)
+		await event.edit("`Wait.. Setting up an Account`")
+		cmd = f'printf "%s\n" "{user}" "{pw}" "{pw1}" "{exp}" | /usr/bin/Bot//usr/bin/Bot/bot-add-tro'
+		try:
+			a = subprocess.check_output(cmd, shell=True).decode("utf-8")
+		except:
+			await event.respond(f"**User** `{user}` **Successfully Created**",buttons = [
+[Button.inline(" TRIAL TROJAN ","trial-trojan"),
+Button.inline(" CREATE TROJAN ","create-trojan")],
+[Button.inline(" CHECK TROJAN ","cek-trojan"),
+Button.inline(" DELETE TROJAN ","delete-trojan")],
+[Button.inline(" LOCK TROJAN ","lock-trojam"),
+Button.inline(" UNLOCK TROJAN ","unlock-trojan")],
+[Button.inline("‹ Main Menu ›","menu")]])
+		else:
+			today = DT.date.today()
+			later = today + DT.timedelta(days=int(exp))
+			b = [x.group() for x in re.finditer("trojan://(.*)",a)]
+			print(b)
+			domain = re.search("@(.*?):",b[0]).group(1)
+			uuid = re.search("trojan://(.*?)@",b[0]).group(1)
+			msg = f"""
+**━━━━━━━━━━━━━━━━━**
+**🐾🕊️ Xray/Trojan Account 🕊️🐾**
+**◇━━━━━━━━━━━━━━━━━◇**
+**» Remarks     :** `{user}`
+**» Host Server :** `{domain}`
+**» Host XrayDNS:** `{HOST}`
+**» User Quota  :** `{pw} GB`
+**» Port DNS    :** `443, 53`
+**» port TLS    :** `222-1000`
+**» User ID     :** `{uuid}`
+**» Pub Key     :** {PUB}
+**━━━━━━━━━━━━━━━━**
+**» Link WS    :** 
+`{b[0].replace(" ","")}`
+**━━━━━━━━━━━━━━━━**
+**» Link GRPC  :** 
+`{b[1].replace(" ","")}`
+**━━━━━━━━━━━━━━━━**
+**» Format OpenClash : https://{domain}:81/trojan-{user}.txt
+**━━━━━━━━━━━━━━━━**
+**Expired Until:** `{later}`
+**» 🤖@ARI_VPN_STORE**
+"""
+			await event.respond(msg)
+	chat = event.chat_id
+	sender = await event.get_sender()
+	a = valid(str(sender.id))
+	if a == "true":
+		await create_trojan_(event)
+	else:
+		await event.answer("Akses Ditolak",alert=True)
+#LOCK trojan
+@bot.on(events.CallbackQuery(data=b'lock-trojan'))
+async def lock_trojan(event):
+	async def lock_trojan_(event):
+		async with bot.conversation(chat) as exp:
+			await event.respond("**Username:**")
+			exp = exp.wait_event(events.NewMessage(incoming=True, from_users=sender.id))
+			exp = (await exp).raw_text
+
+		time.sleep(1)
+		await event.edit("`Processing Crate Premium Account`")
+		time.sleep(0)
+		await event.edit("`Processing... 0%\n▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `")
+		time.sleep(0)
+		await event.edit("`Processing... 4%\n█▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `")
+		time.sleep(0)
+		await event.edit("`Processing... 8%\n██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `")
+		time.sleep(0)
+		await event.edit("`Processing... 20%\n█████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `")
+		time.sleep(0)
+		await event.edit("`Processing... 36%\n█████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `")
+		time.sleep(0)
+		await event.edit("`Processing... 52%\n█████████████▒▒▒▒▒▒▒▒▒▒▒▒ `")
+		time.sleep(0)
+		await event.edit("`Processing... 84%\n█████████████████████▒▒▒▒ `")
+		time.sleep(0)
+		await event.edit("`Processing... 100%\n█████████████████████████ `")
+		time.sleep(1)
+		time.sleep(1)
+		await event.edit("`Wait.. Setting up an Account`")
+		cmd = f'printf "%s\n" "{exp}" | /usr/bin/Bot/bot-lock-tr'
+		try:
+			a = subprocess.check_output(cmd, shell=True).decode("utf-8")
+		except:
+			await event.respond(f"**User** `{exp}` **Successfully Locked**",buttons = [
+[Button.inline(" TRIAL TROJAN ","trial-trojan"),
+Button.inline(" CREATE TROJAN ","create-trojan")],
+[Button.inline(" CHECK TROJAN ","cek-trojan"),
+Button.inline(" DELETE TROJAN ","delete-trojan")],
+[Button.inline(" LOCK TROJAN ","lock-trojam"),
+Button.inline(" UNLOCK TROJAN ","unlock-trojan")],
+[Button.inline("‹ Main Menu ›","menu")]])
+		else:
+			msg = f"""**Successfully Locked**"""
+			await event.respond(msg)
+	chat = event.chat_id
+	sender = await event.get_sender()
+	a = valid(str(sender.id))
+	if a == "true":
+		await lock_trojan_(event)
+	else:
+		await event.answer("Akses Ditolak",alert=True)
+#UNLOCK trojan
+@bot.on(events.CallbackQuery(data=b'unlock-trojan'))
+async def unlock_trojan(event):
+	async def unlock_trojan_(event):
+		async with bot.conversation(chat) as exp:
+			await event.respond("**Username:**")
+			exp = exp.wait_event(events.NewMessage(incoming=True, from_users=sender.id))
+			exp = (await exp).raw_text
+
+		time.sleep(1)
+		await event.edit("`Processing Crate Premium Account`")
+		time.sleep(0)
+		await event.edit("`Processing... 0%\n▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `")
+		time.sleep(0)
+		await event.edit("`Processing... 4%\n█▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `")
+		time.sleep(0)
+		await event.edit("`Processing... 8%\n██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `")
+		time.sleep(0)
+		await event.edit("`Processing... 20%\n█████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `")
+		time.sleep(0)
+		await event.edit("`Processing... 36%\n█████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `")
+		time.sleep(0)
+		await event.edit("`Processing... 52%\n█████████████▒▒▒▒▒▒▒▒▒▒▒▒ `")
+		time.sleep(0)
+		await event.edit("`Processing... 84%\n█████████████████████▒▒▒▒ `")
+		time.sleep(0)
+		await event.edit("`Processing... 100%\n█████████████████████████ `")
+		time.sleep(1)
+		time.sleep(1)
+		await event.edit("`Wait.. Setting up an Account`")
+		cmd = f'printf "%s\n" "{exp}" | /usr/bin/Bot/bot-unlock-tr'
+		try:
+			a = subprocess.check_output(cmd, shell=True).decode("utf-8")
+		except:
+			await event.respond(f"**User** `{exp}` **Successfully Unlock**",buttons = [
+[Button.inline(" TRIAL TROJAN ","trial-trojan"),
+Button.inline(" CREATE TROJAN ","create-trojan")],
+[Button.inline(" CHECK TROJAN ","cek-trojan"),
+Button.inline(" DELETE TROJAN ","delete-trojan")],
+[Button.inline(" LOCK TROJAN ","lock-trojam"),
+Button.inline(" UNLOCK TROJAN ","unlock-trojan")],
+[Button.inline("‹ Main Menu ›","menu")]])
+		else:
+			msg = f"""**Successfully Locked**"""
+			await event.respond(msg)
+	chat = event.chat_id
+	sender = await event.get_sender()
+	a = valid(str(sender.id))
+	if a == "true":
+		await unlock_trojan_(event)
+	else:
+		await event.answer("Akses Ditolak",alert=True)
+@bot.on(events.CallbackQuery(data=b'cek-trojan'))
+async def cek_trojan(event):
+	async def cek_trojan_(event):
+		cmd = '/usr/bin/Bot/bot-cek-tr'.strip()
+		x = subprocess.check_output(cmd, shell=True, stderr=subprocess.STDOUT, universal_newlines=True)
+		print(x)
+		z = subprocess.check_output(cmd, shell=True).decode("utf-8")
+		await event.respond(f"""
+
+{z}
+
+**Shows Logged In Users Trojan**
+**» 🤖@ARI_VPN_STORE**
+""",buttons=[[Button.inline("‹ Main Menu ›","menu")]])
+	sender = await event.get_sender()
+	a = valid(str(sender.id))
+	if a == "true":
+		await cek_trojan_(event)
+	else:
+		await event.answer("Access Denied",alert=True)
+
+@bot.on(events.CallbackQuery(data=b'trial-trojan'))
+async def trial_trojan(event):
+	async def trial_trojan_(event):
+		async with bot.conversation(chat) as exp:
+			await event.respond("**Minutes:**")
+			exp = exp.wait_event(events.NewMessage(incoming=True, from_users=sender.id))
+			exp = (await exp).raw_text
+
+		time.sleep(1)
+		await event.edit("`Processing Crate Premium Account`")
+		time.sleep(1)
+		await event.edit("`Processing... 0%\n▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `")
+		time.sleep(0)
+		await event.edit("`Processing... 4%\n█▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `")
+		time.sleep(0)
+		await event.edit("`Processing... 8%\n██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `")
+		time.sleep(0)
+		await event.edit("`Processing... 20%\n█████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `")
+		time.sleep(1)
+		await event.edit("`Processing... 36%\n█████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `")
+		time.sleep(1)
+		await event.edit("`Processing... 52%\n█████████████▒▒▒▒▒▒▒▒▒▒▒▒ `")
+		time.sleep(0)
+		await event.edit("`Processing... 84%\n█████████████████████▒▒▒▒ `")
+		time.sleep(0)
+		await event.edit("`Processing... 100%\n█████████████████████████ `")
+		time.sleep(1)
+		await event.edit("`Wait.. Setting up an Account`")
+		cmd = f'printf "%s\n" "{exp}" | /usr/bin/Bot/bot-trial-tro'
+		try:
+			a = subprocess.check_output(cmd, shell=True).decode("utf-8")
+		except:
+			await event.respond(f"**Detail Account Trial**",buttons = [
+[Button.inline(" TRIAL TROJAN ","trial-trojan"),
+Button.inline(" CREATE TROJAN ","create-trojan")],
+[Button.inline(" CHECK TROJAN ","cek-trojan"),
+Button.inline(" DELETE TROJAN ","delete-trojan")],
+[Button.inline(" LOCK TROJAN ","lock-trojam"),
+Button.inline(" UNLOCK TROJAN ","unlock-trojan")],
+[Button.inline("‹ Main Menu ›","menu")]])
+		else:
+			#today = DT.date.today()
+			#later = today + DT.timedelta(days=int(exp))
+			b = [x.group() for x in re.finditer("trojan://(.*)",a)]
+			print(b)
+			remarks = re.search("#(.*)",b[0]).group(1)
+			domain = re.search("@(.*?):",b[0]).group(1)
+			uuid = re.search("trojan://(.*?)@",b[0]).group(1)
+			msg = f"""
+**━━━━━━━━━━━━━━━━━**
+**🐾🕊️ Xray/Trojan Account 🕊️🐾**
+**━━━━━━━━━━━━━━━━━**
+**» Remarks     :** `{remarks}`
+**» Host Server :** `{domain}`
+**» Host XrayDNS:** `{HOST}`
+**» User Quota  :** `Unlimited`
+**» Port DNS    :** `443, 53`
+**» port TLS    :** `222-1000`
+**» Path Trojan :** `(/multi path)/trojan-ws`
+**» User ID     :** `{uuid}`
+**» Pub Key     :** {PUB}
+**━━━━━━━━━━━━━━━━**
+**» Link WS    :** 
+`{b[0].replace(" ","")}`
+**━━━━━━━━━━━━━━━━**
+**» Link GRPC  :** 
+`{b[1].replace(" ","")}`
+**━━━━━━━━━━━━━━━━**
+**» Expired Until:** `{exp} Minutes`
+**» 🤖@ARI_VPN_STORE**
+"""
+			await event.respond(msg)
+	chat = event.chat_id
+	sender = await event.get_sender()
+	a = valid(str(sender.id))
+	if a == "true":
+		await trial_trojan_(event)
+	else:
+		await event.answer("Akses Ditolak",alert=True)
+
+@bot.on(events.CallbackQuery(data=b'delete-trojan'))
+async def delete_trojan(event):
+	async def delete_trojan_(event):
+		async with bot.conversation(chat) as user:
+			await event.respond('**Username:**')
+			user = user.wait_event(events.NewMessage(incoming=True, from_users=sender.id))
+			user = (await user).raw_text
+		cmd = f'printf "%s\n" "{user}" | /usr/bin/Bot/bot-del-tro'
+		try:
+			a = subprocess.check_output(cmd, shell=True).decode("utf-8")
+		except:
+			await event.respond(f"**User `{user}` Successfully Deleted**",buttons = [
+[Button.inline(" TRIAL TROJAN ","trial-trojan"),
+Button.inline(" CREATE TROJAN ","create-trojan")],
+[Button.inline(" CHECK TROJAN ","cek-trojan"),
+Button.inline(" DELETE TROJAN ","delete-trojan")],
+[Button.inline(" LOCK TROJAN ","lock-trojam"),
+Button.inline(" UNLOCK TROJAN ","unlock-trojan")],
+[Button.inline("‹ Main Menu ›","menu")]])
+		else:
+			msg = f"""**Successfully Deleted**"""
+			await event.respond(msg)
+	chat = event.chat_id
+	sender = await event.get_sender()
+	a = valid(str(sender.id))
+	if a == "true":
+		await delete_trojan_(event)
+	else:
+		await event.answer("Akses Ditolak",alert=True)
+
+@bot.on(events.CallbackQuery(data=b'trojan'))
+async def trojan(event):
+	async def trojan_(event):
+		inline = [
+[Button.inline(" TRIAL TROJAN ","trial-trojan"),
+Button.inline(" CREATE TROJAN ","create-trojan")],
+[Button.inline(" CHECK TROJAN ","cek-trojan"),
+Button.inline(" DELETE TROJAN ","delete-trojan")],
+[Button.inline(" LOCK TROJAN ","lock-trojam"),
+Button.inline(" UNLOCK TROJAN ","unlock-trojan")],
+[Button.inline("‹ Main Menu ›","menu")]]
+		z = requests.get(f"http://ip-api.com/json/?fields=country,region,city,timezone,isp").json()
+		msg = f"""
+```━━━━━━━━━━━━━━━━━━━━━━━ 
+🐾🕊️ TROJAN MANAGER 🕊️🐾
+━━━━━━━━━━━━━━━━━━━━━━━ 
+🔰 » Service: TROJAN
+🔰 » Hostname/IP: {DOMAIN}
+🔰 » ISP: {z["isp"]}
+🔰 » Country: {z["country"]}
+🤖 » @ARI_VPN_STORE
+━━━━━━━━━━━━━━━━━━━━━━━``` 
+"""
+		await event.edit(msg,buttons=inline)
+	sender = await event.get_sender()
+	a = valid(str(sender.id))
+	if a == "true":
+		await trojan_(event)
+	else:
+		await event.answer("Access Denied",alert=True)

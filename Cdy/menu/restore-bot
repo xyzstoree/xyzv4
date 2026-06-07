@@ -1,0 +1,186 @@
+#!/bin/bash
+
+# COLOR VALIDATION
+RED='\033[0;31m'
+NC='\033[0m'
+gray="\e[1;30m"
+Blue="\033[0;34m"
+green='\033[0;32m'
+grenbo="\e[92;1m"
+YELL='\033[0;33m'
+BG_BLU="\033[44;1m" # BG BIRU
+
+# Getting
+MYIP=$(cat /usr/bin/ipsave)
+IP=$(wget -qO- icanhazip.com)
+dateToday=$(date +"%Y-%m-%d")
+Name=$(curl https://raw.githubusercontent.com/xyzstoree/izin/main/ip | grep $MYIP | awk '{print $2}')
+CHATID=$(grep -E "^#bot# " "/etc/bot/.bot.db" | cut -d ' ' -f 3)
+KEY=$(grep -E "^#bot# " "/etc/bot/.bot.db" | cut -d ' ' -f 2)
+export TIME="10"
+export URL="https://api.telegram.org/bot$KEY/sendMessage"
+
+# . Liner 
+function baris_panjang() {
+   echo -e "\033[5;36m ———————————————————————————————————————————————\033[0m"
+}
+
+function ARI_Banner() {
+    clear
+    baris_panjang
+    NAMASC="ARISCTUNNEL V4"
+function center_text() {
+    local text="$1"
+    local width=50  # Sesuaikan dengan panjang baris yang diinginkan
+
+    # Hapus kode warna untuk menghitung panjang sebenarnya dari teks
+    local plain_text=$(echo -e "$text" | sed 's/\x1b\[[0-9;]*m//g')
+    local len=${#plain_text}
+    local spaces=$(( (width - len) / 2 ))
+
+    # Tampilkan teks dengan warna dan centering yang benar
+    printf "%${spaces}s%s\033[0m\n" "" "$(echo -e "$text")"
+}
+# Kombinasi warna untuk ".::." dan "ARISCTUNNEL V4"
+formatted_text="\e[36m.::.\033[0;35m $NAMASC \e[36m.::."
+# Tampilkan teks yang diformat
+center_text "$formatted_text"
+    baris_panjang
+}
+
+function Sc_Credit() {
+    sleep 1
+    baris_panjang
+function center_text() {
+    local text="$1"
+    local width=50  # Sesuaikan dengan panjang baris yang diinginkan
+
+    # Hapus kode warna untuk menghitung panjang sebenarnya dari teks
+    local plain_text=$(echo -e "$text" | sed 's/\x1b\[[0-9;]*m//g')
+    local len=${#plain_text}
+    local spaces=$(( (width - len) / 2 ))
+
+    # Tampilkan teks dengan warna dan centering yang benar
+    printf "%${spaces}s%s\033[0m\n" "" "$(echo -e "$text")"
+}
+# Kombinasi warna untuk ".::." dan "ARISCTUNNEL V4"
+formatted_text="\033[0;35m Terimakasih sudah menggunakan- \033[0m"
+formatted_text1="\033[0;35m Script Credit By $NAMASC \033[0m"
+# Tampilkan teks yang diformat
+center_text "$formatted_text"
+center_text "$formatted_text1"
+    baris_panjang
+    
+}
+
+function notif_restore() {
+    sleep 2
+    CHATID="$CHATID"
+    KEY="$KEY"
+    TIME="$TIME"
+    URL="$URL"
+    TEXT="
+<code>◇━━━━━━━━━━━━━━◇</code>
+<b>  ⚠️ RESTORE NOTIF⚠️</b>
+<b>     Detail Restore VPS</b>
+<code>◇━━━━━━━━━━━━━━◇</code>
+<b>USERNAME  : ${Name}</b>
+<b>DOMAIN    : ${domain}</b>
+<b>IP        : ${MYIP}</b>
+<b>TODAY     : ${dateToday}</b>
+<b>FILE      : ${filebackup}</b>
+<code>Restore Vps Done</code>
+<code>◇━━━━━━━━━━━━━━◇</code>
+"
+
+    curl -s --max-time $TIME -d "chat_id=$CHATID&disable_web_page_preview=1&text=$TEXT&parse_mode=html" $URL >/dev/null
+}
+
+function restoreBot() {
+    echo -e "[ ${green}INFO${NC} ] • Restore Data..."
+    echo -e "[ ${green}INFO${NC} ] • Getting your data..."
+    7z x -p$InputPass /root/backup.zip &> /dev/null
+    sleep 1  # Adding a delay for smoother process
+    echo -e "[ ${green}INFO${NC} ] • Starting to restore data..."
+    rm -f /root/backup.zip &> /dev/null
+    sleep 1  # Adding a delay after removing the file
+    cd /root/backup
+    echo -e "[ ${green}INFO${NC} ] • Please Wait, Restoring In Process Now... "
+    sleep 1
+    cp passwd /etc/ &>/dev/null
+    echo -e "[ ${green}INFO${NC} ] • Restoring passwd data..."
+    cp group /etc/ &>/dev/null
+    echo -e "[ ${green}INFO${NC} ] • Restoring group data..."
+    cp shadow /etc/ &>/dev/null
+    echo -e "[ ${green}INFO${NC} ] • Restoring shadow data..."
+    cp gshadow /etc/ &>/dev/null
+    echo -e "[ ${green}INFO${NC} ] • Restoring gshadow data..."
+    cp -r kyt /var/lib/ &>/dev/null
+    cp -r xray /etc/ &>/dev/null
+    cp -r html /var/www/ &>/dev/null
+    cp .bot.db /etc/bot/ &>/dev/null
+    cp crontab /etc/ &>/dev/null
+    cp .ssh.db /etc/ssh/ &>/dev/null
+    cp .vmess.db /etc/vmess/ &>/dev/null
+    cp .vless.db /etc/vless/ &>/dev/null
+    cp .trojan.db /etc/trojan/ &>/dev/null
+    cp -rf qt/* /etc/limit &>/dev/null
+    cp -r limit /etc/kyt/ &>/dev/null
+    cp -r backup/banner.txt /etc/banner.txt &>/dev/null
+    cp -r ssh /etc/ &>/dev/null
+    cp -r xray /etc/ &>/dev/null
+    cp -r vmess /etc/ &>/dev/null
+    cp -r trojan /etc/ &>/dev/null
+    cp -r vless /etc/ &>/dev/null
+    cp -r shadowsocks /etc/ &>/dev/null
+    rm -rf /root/backup
+    rm -f backup.zip
+    echo -e "[ ${green}INFO${NC} ] • Done Restore..."
+    read -n 1 -s -r -p "Press any key to return to Menu"
+    menu
+}
+
+
+# Main Execution
+clear
+
+if [[ -z $InputPass ]]; then
+    InputPass="Ari123Ok"
+fi
+
+ARI_Banner
+echo -e " "
+echo -e " Upload your backup file to a supported"
+echo -e " file hosting (direct link)"
+echo -e "      or        "
+echo -e " Send your backup file using Terminus App"
+echo -e " "
+baris_panjang
+echo -e " "
+sleep 1
+file="/root/backup.zip"
+if [[ -f "$file" ]]; then
+    echo -e "${green}Backup File Detected${NC}"
+    restoreBot
+    notif_restore > /dev/null 2>&1
+else
+    echo -e "${RED}Backup File Not Detected${NC}"
+    echo -e "Enter your backup file direct link"
+    echo -e " "
+    read -p "Your link   : " filebackup
+    # Download the backup file
+    if wget -O "$file" "$filebackup" > /dev/null 2>&1; then
+        # Check if the file was downloaded successfully
+        if [[ -f "$file" ]]; then
+            echo -e "${GREEN}Backup File Downloaded Successfully${NC}"
+            restoreBot
+            notif_restore > /dev/null 2>&1
+        else
+            echo -e "${RED}Backup File Error${NC}"
+            echo -e "The file was not downloaded. Please check your link."
+        fi
+    else
+        echo -e "${RED}Download Error${NC}"
+        echo -e "Failed to download the file. Please check your link and try again."
+    fi
+fi

@@ -1,0 +1,117 @@
+#!/bin/bash
+# SL
+# ==========================================
+# Color
+RED='\033[0;31m'
+NC='\033[0m'
+GREEN='\033[0;32m'
+ORANGE='\033[0;33m'
+BLUE='\033[0;34m'
+PURPLE='\033[0;35m'
+CYAN='\033[0;36m'
+LIGHT='\033[0;37m'
+# ==========================================
+
+# Cek apakah wondershaper sudah terinstal
+if command -v wondershaper &> /dev/null; then
+    echo "Wondershaper sudah terinstal."
+else
+    echo "Wondershaper belum terinstal, melakukan instalasi..."
+    
+    # Langkah-langkah instalasi
+    cd /bin || exit
+    echo -e '\033[1;32mwaiting...\e[0m'
+    git clone https://github.com/xyzstoree/wondershaper.git
+    cd wondershaper || exit
+    sudo make install
+    
+    # Kembali ke home directory dan hapus folder wondershaper
+    cd || exit
+    rm -rf wondershaper
+    
+    echo "Instalasi wondershaper selesai."
+fi
+
+clear
+Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
+Info="${Green_font_prefix}[ON]${Font_color_suffix}"
+Error="${Red_font_prefix}[OFF]${Font_color_suffix}"
+cek=$(cat /home/limit)
+NIC=$(ip -o -4 route show to default | awk '{print $5}')
+
+function start () {
+    echo -e "Limit Speed All Service"
+    read -p "Set maximum download rate (in Mbps): " down_mbps
+    read -p "Set maximum upload rate (in Mbps): " up_mbps
+    read -p "Set burst limit (in Mbps): " burst_mbps
+
+    # Konversi Mbps ke Kbps
+    down=$((down_mbps * 1000))
+    up=$((up_mbps * 1000))
+
+    # Konversi burst limit dari Mbps ke KB (1 Mbps = 125 KB)
+    burst_limit=$((burst_mbps * 125))
+    
+    # Menggunakan burst buffer yang sangat besar untuk efek "tanpa batas"
+    burst_buffer=$((burst_limit * 10000))  # Nilai buffer sangat besar
+
+    # Hapus pengaturan tc yang sudah ada
+    tc qdisc del dev $NIC root &> /dev/null
+
+    if [[ -z "$down" ]] && [[ -z "$up" ]]; then
+        echo > /dev/null 2>&1
+    else
+        echo "Start Configuration"
+        sleep 0.5
+        wondershaper -a $NIC -d $down -u $up > /dev/null 2>&1
+        
+        # Menambahkan burst limit menggunakan tc dengan buffer besar
+        tc qdisc add dev $NIC root handle 1: htb default 30
+        tc class add dev $NIC parent 1: classid 1:1 htb rate ${down}kbps burst ${burst_limit}kb cburst ${burst_buffer}kb
+
+        systemctl enable --now wondershaper.service
+        echo "start" > /home/limit
+        echo "Done"
+        	read -n 1 -s -r -p " Press Enter for Back to Manage"
+bash /usr/bin/limitspeed
+    fi
+}
+
+function stop () {
+    wondershaper -ca $NIC
+    systemctl stop wondershaper.service
+    
+    # Hapus pengaturan burst limit
+    tc qdisc del dev $NIC root
+
+    echo "Stop Configuration"
+    sleep 0.5
+    echo > /home/limit
+    echo "Done"
+            	read -n 1 -s -r -p " Press Enter for Back to Manage"
+bash /usr/bin/limitspeed
+}
+
+if [[ "$cek" = "start" ]]; then
+    sts="${Info}"
+else
+    sts="${Error}"
+fi
+
+clear
+echo -e "=================================="
+echo -e "    Limit Bandwidth Speed $sts    "
+echo -e "=================================="
+echo -e "[1]. Start Limit"
+echo -e "[2]. Stop Limit"
+echo -e "==============================="
+read -rp "Please Enter The Correct Number : " -e num
+if [[ "$num" = "1" ]]; then
+    start
+elif [[ "$num" = "2" ]]; then
+    stop
+else
+    clear
+    echo " You Entered The Wrong Number"
+    bash /usr/bin/limitspeed
+fi

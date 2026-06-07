@@ -1,0 +1,104 @@
+#!/bin/bash
+
+# Fungsi untuk mengonfigurasi iptables
+configure_iptables() {
+    echo "Mengonfigurasi iptables..."
+
+    # Menetapkan kebijakan default
+    iptables -P INPUT DROP
+    iptables -P FORWARD DROP
+    iptables -P OUTPUT ACCEPT
+
+    # Mengizinkan IP tertentu (contoh: 192.168.1.1 dan 203.0.113.1)
+    IP=$(cat /usr/bin/ipsave)
+    iptables -A INPUT -s $IP -j ACCEPT
+    iptables -A INPUT -s 103.105.54.142 -j ACCEPT
+
+    # Mengizinkan loopback interface
+    iptables -A INPUT -i lo -j ACCEPT
+
+    # Mengizinkan koneksi yang sudah terbentuk
+    iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+    # Mengizinkan koneksi SSH (port 22)
+    iptables -A INPUT -p tcp --dport 22 -m state --state NEW -m recent --set
+    iptables -A INPUT -p tcp --dport 22 -m state --state NEW -m recent --update --seconds 60 --hitcount 10 -j DROP
+    iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+
+    # Membatasi koneksi HTTP (port 80)
+    iptables -A INPUT -p tcp --dport 80 -m limit --limit 25/minute --limit-burst 100 -j ACCEPT
+
+    # Membatasi koneksi HTTPS (port 443)
+    iptables -A INPUT -p tcp --dport 443 -m limit --limit 25/minute --limit-burst 100 -j ACCEPT
+
+    # Logging dan memblokir koneksi yang mencurigakan
+    iptables -A INPUT -m limit --limit 5/min -j LOG --log-prefix "iptables-dropped: " --log-level 7
+    iptables -A INPUT -j DROP
+
+    # Menyimpan aturan iptables
+    iptables-save > /etc/iptables/rules.v4
+
+    echo "Konfigurasi iptables selesai."
+}
+
+# Fungsi untuk menginstal dan mengonfigurasi Fail2ban
+install_fail2ban() {
+    echo "Menginstal Fail2ban..."
+
+    # Instal Fail2ban
+    apt-get update
+    apt-get install -y fail2ban
+
+    # Konfigurasi Fail2ban untuk memantau log tertentu
+    cat <<EOF > /etc/fail2ban/jail.local
+[DEFAULT]
+bantime = 3600
+findtime = 600
+maxretry = 5
+
+[sshd]
+enabled = true
+port    = ssh
+logpath = %(sshd_log)s
+backend = systemd
+
+[http-get-dos]
+enabled  = true
+port     = http,https
+filter   = http-get-dos
+logpath  = /var/log/nginx/access.log
+maxretry = 200
+findtime = 200
+bantime  = 600
+
+[recidive]
+enabled = true
+logpath = /var/log/fail2ban.log
+action  = iptables-allports[name=recidive]
+bantime  = 604800  ; 1 week
+findtime = 86400   ; 1 day
+maxretry = 5
+EOF
+
+    # Buat filter untuk HTTP GET DOS
+    cat <<EOF > /etc/fail2ban/filter.d/http-get-dos.conf
+[Definition]
+failregex = ^<HOST> -."(GET|POST).
+ignoreregex =
+EOF
+
+    # Restart Fail2ban
+    systemctl restart fail2ban
+    systemctl enable fail2ban
+
+    echo "Fail2ban diinstal dan dikonfigurasi."
+}
+
+# Memulai konfigurasi
+main() {
+    configure_iptables
+    install_fail2ban
+}
+
+# Eksekusi script
+main

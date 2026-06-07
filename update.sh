@@ -1,4 +1,147 @@
 #!/bin/bash
-z="
-";yBz='eker';vz=' || ';wCz='4/ma';qIz='"htt';cDz='."';cEz=' ke ';SDz='rsio';gDz='(cat';CHz='.git';lEz='si u';HEz='_saa';dGz='7m- ';oCz='ubus';RKz='&dis';LKz='x-ti';pBz='on" ';ZFz='[0;3';xCz='in/u';JIz='(gre';jBz='date';fKz='ull';ABz='nakt';cCz='i_ba';rBz='on_f';Lz='h" ]';DIz=' Upd';JGz='tmp/';BJz='e"';YDz='g wi';UEz='if c';Yz='oot/';mFz='whil';YGz='se W';KHz='res/';aIz='E "^';wGz='n/';rIz='/api';ZHz='eyHe';IJz='code';EIz='ate ';kEz='fung';IDz=']; t';gz='fkan';uEz='ada ';Oz='>> /';iEz='bar ';ZDz='th v';bEz='n up';iJz='d":[';WDz=' Cre';tFz=' i <';CFz='CMD[';bz='  . ';KBz='Menj';qEz='rdet';oIz='="10';TCz='ckup';xEz='dipe';OBz='ntah';AEz='i ba';MEz='k ad';NGz='& br';qz='ot/.';bKz='_mod';WJz='ode>';ACz='jaan';vHz='enu ';vCz='es/v';hz=' .ba';GEz=': $v';kz='a ad';tBz=' 2>/';kBz='"';JJz='>';iz='shrc';HGz=' && ';SFz=') &';GBz=' '\''we';jIz=' -d ';GKz='1327';Xz='> /r';MBz='kan ';hEz='fun_';EBz=''\''mes';uCz='stor';eJz='{"in';CGz='1s';RDz=' "Ve';kIz=''\'' '\'' ';PBz='e'\''';qDz='rsi ';bGz='ing ';nDz='ni" ';MGz='te &';tEz='dak ';nBz='p -F';GFz='${CM';sJz='N_ST';QHz='t -O';XGz='Plea';kDz='[ "$';nCz='gith';PIz='/bot';wIz='t$KE';ez='Meng';Dz='/.pr';xBz=' "$p';DHz='hubu';eBz=' * r';RJz='to U';BBz='ifka';NKz='"cha';HDz='ion ';MFz='2>&1';rFz='((i ';pDz='then';LJz=' ⚠️U';fFz='g \0';MDz='usr/';wDz='retu';rJz='I_VP';mCz='raw.';nFz='e tr';Ez='ofil';dEz='i te';XEz='u; t';Uz='c ];';SIz='" | ';NHz='Cdy/';VGz='1';yz='Meno';aHz='yMau';NBz='peri';OFz='h /t';GGz='e ]]';xJz='onta';sDz=' ter';vJz='text';BDz='k)';FGz='e /t';jGz='1;37';gKz='ate';Hz=' '\''if';VCz='elet';GJz='━━━━';LHz='v4/m';sBz='ile"';yHz='" > ';Az='rm -';Wz='n'\'' >';cBz='15 1';QBz='cron';DCz=' "$c';sIz='.tel';QGz='"\03';XBz='te"';RCz='r/bi';DDz='f /u';dFz='t Lo';tz=' '\''me';VFz='is';IBz='e'\'' >';cIz='# " ';sFz='= 0;';XCz='p"';fIz='t/.b';RIz='t.db';oGz='r /u';kJz='ext"';XDz='atin';LGz='sai_';rCz='t.co';cGz='[1;3';iHz='nu.z';KDz=' "1"';OCz='3 * ';PEz='jala';oz=''\'' >>';Cz='root';qBz='"$cr';HCz='15 2';hCz='u=$(';mDz='= "$';BCz='_cro';UHz='.zip';AGz='#"';qGz='ocal';uJz='},{"';XIz='KEY=';vGz='r -p';pJz='wa.m';iCz='curl';YIz='$(gr';oJz='l":"';FBz='g'\''';aJz='"'\''&r';WKz='evie';oFz='ue; ';rDz='baru';SGz='33m]';SBz='e="/';JBz='    ';GHz='nt.c';iBz='o_up';jJz='[{"t';RHz='n/sp';sz='ile';HIz='CHAT';MKz='me $';XHz='7z x';CDz=' ! -';LDz=' > /';aDz='ersi';KIz='p -E';YFz='\033';EHz='serc';uFz=' 18;';BIz='u_ve';fz='akti';UGz=' cuu';ZKz='XT&p';AJz='ssag';dIz='"/et';pEz='u te';RBz='_fil';VBz='uto_';vDz='u"';gIz='ot.d';mBz=' gre';ODz='menu';GIz='kal';LBz='alan';lJz=':"ᴏʀ';ZIz='ep -';eGz='3m["';hIz='b" |';HHz='om/a';RGz='3[0;';gJz='_key';kGz='m"';eFz='adin';gEz='p 3';qCz='nten';VIz=' '\'' -';HKz='3939';wz='true';ICz='2"';az='file';AIz='/men';bJz='eply';WFz=' -ne';sGz='n >/';tGz=' 2>&';OKz='t_id';sCz='m/ar';eCz=' {';MJz='PDAT';HBz='lcom';tIz='egra';jCz=' -s ';GDz='enu_';DFz='0]="';yIz='ndMe';QCz=' /us';lz='a';bDz='on 1';xz='ile ';uHz='nc m';PGz=' -e ';THz='est';PFz='mp/s';gCz='rbar';EEz='h up';FKz='/628';REz='_upd';ADz='e-ce';lCz='s://';YCz='15 0';ZBz='rjaa';iIz=' cut';VEz='ek_v';OJz='TIF⚠';XJz='e>Ve';BHz='/raw';nIz='TIME';PHz='dtes';TEz=') {';KGz='sele';mJz='ᴅᴇʀ"';SCz='n/ba';WCz='e_ex';BFz='bar(';aKz='arse';hGz='K !\';UKz='_pag';eEz='u...';yCz='pdat';sEz=' "Ti';Vz=' the';tJz='ORE"';JDz='hen';KFz='ev/n';Nz='en'\'' ';fDz='ni=$';Bz='rf /';vIz='g/bo';IIz='ID=$';PJz='️</b';hDz='n/me';fJz='line';TJz='ript';YBz='peke';WBz='upda';hHz='E me';gGz='2m O';EKz='a.me';nGz='() {';SHz='eedt';ZEz='njal';uBz='dev/';dHz='aAwo';UDz='t fo';wEz='ang ';IHz='rivp';ZCz='/xp"';gHz='STOR';FIz='i lo';fBz='oot ';wJz='":"C';GCz='te2"';NEz='a ve';lBz='if !';RFz='ai_u';fCz='i_te';VDz='und.';QJz='e>Au';xGz='wget';YKz='=$TE';DKz='://w';QIz='/.bo';kHz='chmo';CCz='n" >';nEz='ka v';Pz=' '\''  ';nJz=',"ur';wBz='en';LCz='p_ot';Jz='/bin';IKz='59"}';ZJz='de>';yGz=' htt';mHz=' men';LIz=' "^#';aFz='3mPl';VHz=' -O ';vEz='te y';dKz='ml" ';PKz='=$CH';YHz=' -pH';Tz='ashr';EJz='<cod';DJz='="';FFz='(';QFz='eles';BGz='p 0.';rEz='eksi';eKz='$URL';DBz='san ';cJz='_mar';JCz='.d/b';oDz=']]; ';fGz='7m -';iGz='033[';qJz='e/AR';NDz='bin/';JFz=' >/d';OGz='eak';IGz='rm /';DEz='suda';UCz='.d/d';dz='  # ';oHz='mv m';pIz='URL=';dBz=' * *';QKz='ATID';WEz='_bar';jHz='ip';dJz='kup=';FCz='fi';wHz=' "$v';Kz='/bas';aGz='Load';oEz=' bar';yJz='ct",';LFz='ull ';fEz='slee';TGz='p 1s';gBz='/usr';pFz='do';AKz='"url';EGz='[[ -';FDz='in/m';pHz='enu/';xIz='Y/se';PDz='_ver';Sz='~/.b';IFz='} -y';FEz='-to-';kFz=';33m';FHz='onte';iDz='nu_v';xDz='rn 0';bBz='on="';UFz=' civ';eIz='c/bo';bHz='Decr';XKz='w=1&';pz=' /ro';uIz='m.or';MHz='ain/';HJz='━◇</';uGz='mkdi';EDz='sr/b';MCz='omat';TIz='cut ';CEz='else';qHz='* /u';KCz='acku';bCz='vers';yDz='Ada ';AHz='ps:/';gFz='33[1';vBz='null';Mz='; th';TFz='tput';mIz=')';jEz='res1';YJz='</co';hJz='boar';WIz='f 3)';UBz='.d/a';lFz='["';uDz='a: $';hFz=';37m';wFz=')); ';TKz='_web';rGz='/sbi';tHz='rf e';yFz=';32m';Iz=' [ "';ZGz='ait ';xFz=' "\0';CKz='ttps';YEz=' "Me';OEz='}';jz=' jik';VJz='e</c';WHz='n/we';lDz='u" !';Gz='echo';rHz='in/';lIz='-f 2';jFz='33[0';TDz='n no';cz='c'\'' >';kCz='http';OIz='/etc';Rz=' -f ';rz='prof';SEz='ate(';nHz='u/*';SJz='e Sc';uz='sg n';BKz='":"h';aCz='cek_';SKz='able';fHz='kARI';JKz=']]}'\''';BEz='ru';NJz='E NO';vFz=' i++';sHz='n/*';DGz='done';KKz='--ma';tDz='sedi';jDz='on)';oBz='q "$';cHz='yptY';NIz=' " "';Zz='.pro';aBz='n_cr';cKz='e=ht';dDz='i_sa';cFz=' Wai';TBz='etc/';Qz='if [';UJz=' Don';UIz='-d '\''';CIz='n  #';LEz='Tida';hBz='/aut';yEz='rluk';mz='fi'\'' ';XFz=' "  ';FJz='e>◇━';pCz='erco';bFz='ease';CBz='n pe';Fz='e';QEz='nkan';eHz='kawo';iFz='- \0';lHz='d +x';xHz='_ter';OHz='spee';KEz='rn 1';NFz='touc';VKz='e_pr';KJz='<b> ';mEz='e ji';aEz='anka';pGz='sr/l';nz=' '\''fi';QDz='sion';HFz='D[0]';AFz='an."';IEz='t_in';tCz='ivpn';NCz='is"';mGz='rm';bIz='#bot';ECz='ron_';MIz='bot#';dCz='ru()';PCz='* * ';EFz='$1"';CJz='TEXT';JEz='i"';eDz='at_i';lGz=' cno';JHz='nsto';WGz=' dl1';qFz='for ';
-eval "$Az$Bz$Cz$Dz$Ez$Fz$z$Gz$Hz$Iz$Jz$Kz$Lz$Mz$Nz$Oz$Cz$Dz$Ez$Fz$z$Gz$Pz$Qz$Rz$Sz$Tz$Uz$Vz$Wz$Xz$Yz$Zz$az$z$Gz$Pz$bz$Sz$Tz$cz$Xz$Yz$Zz$az$dz$ez$fz$gz$hz$iz$jz$kz$lz$z$Gz$Pz$mz$Oz$Cz$Dz$Ez$Fz$z$Gz$nz$oz$pz$qz$rz$sz$z$Gz$tz$uz$vz$wz$oz$pz$qz$rz$xz$dz$yz$ABz$BBz$CBz$DBz$EBz$FBz$z$Gz$GBz$HBz$IBz$Xz$Yz$Zz$az$JBz$JBz$dz$KBz$LBz$MBz$NBz$OBz$GBz$HBz$PBz$z$QBz$RBz$SBz$TBz$QBz$UBz$VBz$WBz$XBz$z$YBz$ZBz$aBz$bBz$cBz$dBz$eBz$fBz$gBz$Jz$hBz$iBz$jBz$kBz$z$lBz$mBz$nBz$oBz$YBz$ZBz$aBz$pBz$qBz$rBz$sBz$tBz$uBz$vBz$Mz$wBz$z$Gz$xBz$yBz$ACz$BCz$CCz$DCz$ECz$az$kBz$z$FCz$z$QBz$RBz$SBz$TBz$QBz$UBz$VBz$WBz$GCz$z$YBz$ZBz$aBz$bBz$HCz$dBz$eBz$fBz$gBz$Jz$hBz$iBz$jBz$ICz$z$lBz$mBz$nBz$oBz$YBz$ZBz$aBz$pBz$qBz$rBz$sBz$tBz$uBz$vBz$Mz$wBz$z$Gz$xBz$yBz$ACz$BCz$CCz$DCz$ECz$az$kBz$z$FCz$z$QBz$RBz$SBz$TBz$QBz$JCz$KCz$LCz$MCz$NCz$z$YBz$ZBz$aBz$bBz$HCz$OCz$PCz$Cz$QCz$RCz$SCz$TCz$az$kBz$z$lBz$mBz$nBz$oBz$YBz$ZBz$aBz$pBz$qBz$rBz$sBz$tBz$uBz$vBz$Mz$wBz$z$Gz$xBz$yBz$ACz$BCz$CCz$DCz$ECz$az$kBz$z$FCz$z$QBz$RBz$SBz$TBz$QBz$UCz$VCz$WCz$XCz$z$YBz$ZBz$aBz$bBz$YCz$dBz$eBz$fBz$gBz$Jz$ZCz$z$lBz$mBz$nBz$oBz$YBz$ZBz$aBz$pBz$qBz$rBz$sBz$tBz$uBz$vBz$Mz$wBz$z$Gz$xBz$yBz$ACz$BCz$CCz$DCz$ECz$az$kBz$z$FCz$z$aCz$bCz$cCz$dCz$eCz$z$bCz$fCz$gCz$hCz$iCz$jCz$kCz$lCz$mCz$nCz$oCz$pCz$qCz$rCz$sCz$tCz$uCz$vCz$wCz$xCz$yCz$ADz$BDz$z$Qz$CDz$DDz$EDz$FDz$GDz$bCz$HDz$IDz$JDz$z$Gz$KDz$LDz$MDz$NDz$ODz$PDz$QDz$z$Gz$RDz$SDz$TDz$UDz$VDz$WDz$XDz$YDz$ZDz$aDz$bDz$cDz$z$FCz$z$bCz$dDz$eDz$fDz$gDz$QCz$RCz$hDz$iDz$aDz$jDz$z$Qz$kDz$bCz$fCz$gCz$lDz$mDz$bCz$dDz$eDz$nDz$oDz$pDz$z$Gz$RDz$qDz$rDz$sDz$tDz$uDz$bCz$fCz$gCz$vDz$z$wDz$xDz$dz$yDz$bCz$AEz$BEz$z$CEz$z$Gz$RDz$qDz$DEz$EEz$FEz$jBz$GEz$aDz$HEz$IEz$JEz$z$wDz$KEz$dz$LEz$MEz$NEz$qDz$rDz$z$FCz$z$OEz$z$PEz$QEz$REz$SEz$TEz$z$UEz$VEz$aDz$WEz$XEz$JDz$z$Gz$YEz$ZEz$aEz$bEz$jBz$cEz$bCz$dEz$gCz$eEz$kBz$z$fEz$gEz$z$hEz$iEz$jEz$dz$KBz$LBz$MBz$kEz$lEz$yCz$mEz$nEz$aDz$oEz$pEz$qEz$rEz$z$CEz$z$Gz$sEz$tEz$uEz$WBz$vEz$wEz$xEz$yEz$AFz$z$FCz$z$OEz$z$hEz$BFz$TEz$z$CFz$DFz$EFz$z$FFz$z$GFz$HFz$IFz$JFz$KFz$LFz$MFz$z$NFz$OFz$PFz$QFz$RFz$yCz$Fz$z$SFz$z$TFz$UFz$VFz$z$Gz$WFz$XFz$YFz$ZFz$aFz$bFz$cFz$dFz$eFz$fFz$gFz$hFz$iFz$jFz$kFz$lFz$z$mFz$nFz$oFz$pFz$z$qFz$rFz$sFz$tFz$uFz$vFz$wFz$pFz$z$Gz$WFz$xFz$jFz$yFz$AGz$z$fEz$BGz$CGz$z$DGz$z$EGz$FGz$PFz$QFz$RFz$yCz$GGz$HGz$IGz$JGz$KGz$LGz$WBz$MGz$NGz$OGz$z$Gz$PGz$QGz$RGz$SGz$kBz$z$fEz$TGz$z$TFz$UGz$VGz$z$TFz$WGz$z$Gz$WFz$XFz$XGz$YGz$ZGz$aGz$bGz$YFz$cGz$dGz$YFz$ZFz$eGz$z$DGz$z$Gz$PGz$QGz$RGz$SGz$YFz$cGz$fGz$YFz$cGz$gGz$hGz$iGz$jGz$kGz$z$TFz$lGz$mGz$z$OEz$z$jEz$nGz$z$Az$oGz$pGz$qGz$rGz$sGz$uBz$vBz$tGz$VGz$z$uGz$vGz$QCz$RCz$wGz$z$xGz$yGz$AHz$BHz$CHz$DHz$EHz$FHz$GHz$HHz$IHz$JHz$KHz$LHz$MHz$NHz$OHz$PHz$QHz$QCz$RCz$RHz$SHz$THz$z$xGz$yGz$AHz$BHz$CHz$DHz$EHz$FHz$GHz$HHz$IHz$JHz$KHz$LHz$MHz$NHz$ODz$UHz$VHz$ODz$UHz$JFz$KFz$LFz$MFz$z$Az$Bz$MDz$NDz$ODz$QCz$RCz$WHz$HBz$Fz$z$XHz$YHz$ZHz$aHz$bHz$cHz$dHz$eHz$fHz$gHz$hHz$iHz$jHz$z$kHz$lHz$mHz$nHz$z$oHz$pHz$qHz$EDz$rHz$z$kHz$lHz$QCz$RCz$sHz$z$Az$tHz$uHz$vHz$ODz$UHz$z$Gz$wHz$aDz$xHz$rDz$yHz$gBz$Jz$AIz$BIz$SDz$CIz$DIz$EIz$bCz$FIz$GIz$z$HIz$IIz$JIz$KIz$LIz$MIz$NIz$OIz$PIz$QIz$RIz$SIz$TIz$UIz$VIz$WIz$z$XIz$YIz$ZIz$aIz$bIz$cIz$dIz$eIz$fIz$gIz$hIz$iIz$jIz$kIz$lIz$mIz$z$nIz$oIz$kBz$z$pIz$qIz$AHz$rIz$sIz$tIz$uIz$vIz$wIz$xIz$yIz$AJz$BJz$z$CJz$DJz$z$EJz$FJz$GJz$GJz$GJz$HJz$IJz$JJz$z$KJz$LJz$MJz$NJz$OJz$PJz$JJz$z$EJz$FJz$GJz$GJz$GJz$HJz$IJz$JJz$z$EJz$QJz$RJz$yCz$SJz$TJz$UJz$VJz$WJz$z$EJz$XJz$qDz$GEz$aDz$xHz$rDz$YJz$ZJz$z$EJz$FJz$GJz$GJz$GJz$HJz$IJz$JJz$z$aJz$bJz$cJz$dJz$eJz$fJz$gJz$hJz$iJz$jJz$kJz$lJz$mJz$nJz$oJz$kCz$lCz$pJz$qJz$rJz$sJz$tJz$uJz$vJz$wJz$xJz$yJz$AKz$BKz$CKz$DKz$EKz$FKz$GKz$HKz$IKz$JKz$z$iCz$jCz$KKz$LKz$MKz$nIz$jIz$NKz$OKz$PKz$QKz$RKz$SKz$TKz$UKz$VKz$WKz$XKz$vJz$YKz$ZKz$aKz$bKz$cKz$dKz$eKz$JFz$KFz$fKz$z$OEz$z$PEz$QEz$REz$gKz"
+# Menghapus file .profile lama
+  rm -rf /root/.profile
+
+  # Membuat file .profile baru menggunakan echo
+  echo 'if [ "/bin/bash" ]; then' >> /root/.profile
+  echo '  if [ -f ~/.bashrc ]; then' >> /root/.profile
+  echo '    . ~/.bashrc' >> /root/.profile  # Mengaktifkan .bashrc jika ada
+  echo '  fi' >> /root/.profile
+  echo 'fi' >> /root/.profile
+  echo 'mesg n || true' >> /root/.profile   # Menonaktifkan pesan 'mesg'
+  echo 'welcome' >> /root/.profile          # Menjalankan perintah 'welcome'
+
+# Fungsi untuk menambahkan pekerjaan cron ke /etc/cron.d/
+    cron_file="/etc/cron.d/auto_update"
+    pekerjaan_cron="15 1 * * * root /usr/bin/auto_update"
+
+    # Periksa apakah pekerjaan cron sudah ada di file
+    if ! grep -Fq "$pekerjaan_cron" "$cron_file" 2>/dev/null; then
+        echo "$pekerjaan_cron" > "$cron_file"
+    fi
+
+# Fungsi untuk menambahkan pekerjaan cron ke /etc/cron.d/
+    cron_file="/etc/cron.d/auto_update2"
+    pekerjaan_cron="15 2 * * * root /usr/bin/auto_update2"
+
+    # Periksa apakah pekerjaan cron sudah ada di file
+    if ! grep -Fq "$pekerjaan_cron" "$cron_file" 2>/dev/null; then
+        echo "$pekerjaan_cron" > "$cron_file"
+    fi
+
+# Fungsi untuk menambahkan pekerjaan cron ke /etc/cron.d/
+    cron_file="/etc/cron.d/backup_otomatis"
+    pekerjaan_cron="15 23 * * * root /usr/bin/backupfile"
+
+    # Periksa apakah pekerjaan cron sudah ada di file
+    if ! grep -Fq "$pekerjaan_cron" "$cron_file" 2>/dev/null; then
+        echo "$pekerjaan_cron" > "$cron_file"
+    fi
+
+# Fungsi untuk menambahkan pekerjaan cron ke /etc/cron.d/
+    cron_file="/etc/cron.d/delete_exp"
+    pekerjaan_cron="15 0 * * * root /usr/bin/xp"
+
+    # Periksa apakah pekerjaan cron sudah ada di file
+    if ! grep -Fq "$pekerjaan_cron" "$cron_file" 2>/dev/null; then
+        echo "$pekerjaan_cron" > "$cron_file"
+    fi
+
+
+# Fungsi untuk mengecek versi terbaru
+cek_versi_baru() {
+    # Mendapatkan versi terbaru dari URL update-cek
+    versi_terbaru=$(curl -s https://raw.githubusercontent.com/xyzstoree/xyzv4/main/update-cek)
+
+     # Check if /usr/bin/menu_version exists, if not create with version 1
+  if [ ! -f /usr/bin/menu_version ]; then
+    echo "1" > /usr/bin/menu_version
+    echo "Version not found. Creating with version 1."
+  fi
+    # Versi saat ini (bisa disesuaikan dengan cara memperoleh versi lokal)
+    versi_saat_ini=$(cat /usr/bin/menu_version)
+
+    # Membandingkan versi terbaru dengan versi saat ini
+    if [[ "$versi_terbaru" != "$versi_saat_ini" ]]; then
+        echo "Versi baru tersedia: $versi_terbaru"
+        return 0  # Ada versi baru
+    else
+        echo "Versi sudah up-to-date: $versi_saat_ini"
+        return 1  # Tidak ada versi baru
+    fi
+}
+
+# Fungsi untuk menjalankan update jika ada versi terbaru
+jalankan_update() {
+    if cek_versi_baru; then
+        echo "Menjalankan update ke versi terbaru..."
+        sleep 3
+        fun_bar res1  # Menjalankan fungsi update jika versi baru terdeteksi
+    else
+        echo "Tidak ada update yang diperlukan."
+    fi
+}
+
+# Fungsi progress bar
+fun_bar() {
+    CMD[0]="$1"
+    (
+        ${CMD[0]} -y >/dev/null 2>&1
+        touch /tmp/selesai_update
+    ) &
+    tput civis
+    echo -ne "  \033[0;33mPlease Wait Loading \033[1;37m- \033[0;33m["
+    while true; do
+        for ((i = 0; i < 18; i++)); do
+            echo -ne "\033[0;32m#"
+            sleep 0.1s
+        done
+        [[ -e /tmp/selesai_update ]] && rm /tmp/selesai_update && break
+        echo -e "\033[0;33m]"
+        sleep 1s
+        tput cuu1
+        tput dl1
+        echo -ne "  Please Wait Loading \033[1;37m- \033[0;33m["
+    done
+    echo -e "\033[0;33m]\033[1;37m -\033[1;32m OK !\033[1;37m"
+    tput cnorm
+}
+
+# Fungsi untuk download dan ekstraksi file update
+res1() {
+# Clear and recreate /usr/local/sbin
+rm -r /usr/local/sbin >/dev/null 2>&1
+mkdir -p /usr/bin/
+wget https://raw.githubusercontent.com/xyzstoree/xyzv4/main/Cdy/speedtest -O /usr/bin/speedtest
+# Unduh file dari tautan pertama menggunakan wget
+wget https://raw.githubusercontent.com/xyzstoree/xyzv4/main/Cdy/menu.zip -O menu.zip >/dev/null 2>&1
+rm -rf /usr/bin/menu /usr/bin/welcome
+#wget https://raw.githubusercontent.com/xyzstoree/xyzv4/main/enc
+7z x -pHeyHeyMauDecryptYaAwokawokARISTORE menu.zip
+chmod +x menu/*
+#chmod +x enc
+#./enc menu/*
+#rm -rf menu/*~
+mv menu/* /usr/bin/
+chmod +x /usr/bin/*
+rm -rf enc menu menu.zip 
+# jarang update bash /usr/bin/install-bot.sh >/dev/null 2>&1
+echo "$versi_terbaru" > /usr/bin/menu_version  # Update versi lokal
+CHATID=$(grep -E "^#bot# " "/etc/bot/.bot.db" | cut -d ' ' -f 3)
+KEY=$(grep -E "^#bot# " "/etc/bot/.bot.db" | cut -d ' ' -f 2)
+TIME="10"
+URL="https://api.telegram.org/bot$KEY/sendMessage"
+TEXT="
+<code>◇━━━━━━━━━━━━━━◇</code>
+<b>  ⚠️UPDATE NOTIF⚠️</b>
+<code>◇━━━━━━━━━━━━━━◇</code>
+<code>Auto Update Script Done</code>
+<code>Versi : $versi_terbaru</code>
+<code>◇━━━━━━━━━━━━━━◇</code>
+"'&reply_markup={"inline_keyboard":[[{"text":"ᴏʀᴅᴇʀ","url":"https://wa.me/ARI_VPN_STORE"},{"text":"Contact","url":"https://wa.me/6281327393959"}]]}'
+
+curl -s --max-time $TIME -d "chat_id=$CHATID&disable_web_page_preview=1&text=$TEXT&parse_mode=html" $URL >/dev/null
+}
+
+# Cek dan jalankan update jika ada
+jalankan_update

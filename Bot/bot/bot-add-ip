@@ -1,0 +1,619 @@
+#!/bin/bash
+
+# Color definitions
+DF='\e[39m'
+Bold='\e[1m'
+Blink='\e[5m'
+yell='\e[33m'
+red='\e[31m'
+green='\e[32m'
+blue='\e[34m'
+PURPLE='\e[35m'
+g="\e[36m"
+gb='\033[0;37m'
+NC='\e[0m'
+cyan='\e[36m'
+Lred='\e[91m'
+Lgreen='\e[92m'
+Lyellow='\e[93m'
+GREEN='\033[0;32m'
+ORANGE='\033[0;33m'
+LIGHT='\033[0;37m'
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+ORANGE='\033[0;33m'
+BLUE='\033[0;34m'
+PURPLE='\033[0;35m'
+CYAN='\033[0;36m'
+LIGHT='\033[0;37m'
+
+# Helper functions
+purple() { echo -e "\\033[35;1m${*}\\033[0m"; }
+tyblue() { echo -e "\\033[36;1m${*}\\033[0m"; }
+yellow() { echo -e "\\033[33;1m${*}\\033[0m"; }
+green() { echo -e "\\033[32;1m${*}\\033[0m"; }
+red() { echo -e "\\033[31;1m${*}\\033[0m"; }
+
+# Banner functions
+function line_atas() {
+    echo -e " ${CYAN}┌─────────────────────────────────────┐${NC}"
+}
+
+function line_bawah() {
+    echo -e " ${CYAN}└─────────────────────────────────────┘${NC}"
+}
+
+function line_tengah() {
+    echo -e " ${CYAN}┌─────────────────────────────────────•${NC}"
+}
+
+function line_tengh() {
+    echo -e " ${CYAN}└─────────────────────────────────────•${NC}"
+}
+
+function ARI_Banner() {
+    clear
+    line_atas
+    echo -e "\e[36m        .::. \033[0;35mARISCTUNNEL V4 \e[36m.::.        \033[0m"
+    line_bawah
+}
+
+function ATAS() {
+    echo -e "\033[0;35m             FEATURES ADMIN             \033[0m "
+}
+
+function Banner() {
+    clear
+    ARI_Banner
+    line_atas
+    ATAS
+    line_bawah
+}
+
+# Valid Script
+ipsaya=$(cat /usr/bin/ipsave)
+data_server=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Date | sed -e 's/< Date: //')
+date_list=$(date +"%Y-%m-%d" -d "$data_server")
+
+# Dua link validasi data IP
+data_ip1="https://raw.githubusercontent.com/xyzstoree/izin/main/ip-admin"
+data_ip2="https://raw.githubusercontent.com/xyzstoree/xyzv4/main/ip-admin"
+
+checking_sc() {
+  # Cek di data_ip1
+  useexp=$(wget -qO- $data_ip1 | grep $ipsaya | awk '{print $3}')
+  
+  # Jika tidak ditemukan di data_ip1, cek di data_ip2
+  if [[ -z $useexp ]]; then
+    useexp=$(wget -qO- $data_ip2 | grep $ipsaya | awk '{print $3}')
+  fi
+  
+  # Validasi tanggal
+  if [[ $date_list < $useexp ]]; then
+    echo -ne
+  else
+    echo -e "\033[1;93m────────────────────────────────────────────\033[0m"
+    echo -e "\033[42m          404 NOT FOUND AUTOSCRIPT          \033[0m"
+    echo -e "\033[1;93m────────────────────────────────────────────\033[0m"
+    echo -e ""
+    echo -e "            \033[91;1mPERMISSION DENIED !\033[0m"
+    echo -e "   \033[0;33mYour VPS\033[0m $ipsaya \033[0;33mHas been Banned\033[0m"
+    echo -e "     \033[0;33mBuy access permissions for scripts\033[0m"
+    echo -e "             \033[0;33mContact Admin :\033[0m"
+    echo -e "      \033[2;32mWhatsApp\033[0m https://wa.me/6281327393959"
+    echo -e "      \033[2;32mTelegram\033[0m https://t.me/ARI_VPN_STORE"
+    echo -e "\033[1;93m────────────────────────────────────────────\033[0m"
+    exit
+  fi
+}
+checking_sc
+if ! dpkg -s sshpass >/dev/null 2>&1; then
+  echo "sshpass belum terinstal. Menginstal sekarang..."
+  sudo apt-get install sshpass -y > /dev/null 2>&1
+  clear
+else
+  clear
+fi
+
+# GitHub repository details
+TARGET_VPS="206.189.43.85"  # Ganti dengan IP atau domain VPS target
+USERNAME="root"                   # Ganti dengan username yang akan digunakan (misal root)
+PASSWORD="BjKWz0L72O6S6F0OmwnV"       # Ganti dengan password root dari VPS target
+REPO="https://raw.githubusercontent.com/xyzstoree/izin/main/ip"
+CHATID=1962241851
+KEY=7521866492:AAHyCMIvnB_KsNkC2va27NyDEUmpjowM0ik
+TIME="10"
+URL="https://api.telegram.org/bot$KEY/sendMessage"
+
+# Functions for managing IPs
+update_repo() {
+    local commit_message="$1"
+
+}
+
+send_telegram_notification() {
+    local message="$1"
+    curl -s --max-time $TIME -d "chat_id=$CHATID&disable_web_page_preview=1&text=$message&parse_mode=html" $URL >/dev/null
+}
+
+add_ip() {
+    wget $REPO -O ip-script > /dev/null 2>&1
+    read -p "Input IP Address: " ip
+    CLIENT_EXISTS=$(grep -w $ip ip-script | wc -l)
+    if [[ ${CLIENT_EXISTS} == '1' ]]; then
+        echo "IP Already Exist!"
+        rm -rf ip-script
+        exit 0
+    fi
+    read -p "Input username: " name
+    read -p "Masukan waktu expired (days): " exp
+    exp2=$(date -d "${exp} days" +"%Y-%m-%d")
+    echo "### ${name} ${exp2} ${ip}" >> ip-script
+  # Pastikan file ip-script sudah ada di VPS
+ sshpass -p "$PASSWORD" ssh -o StrictHostKeyChecking=no $USERNAME@$TARGET_VPS "touch /home/https://raw.githubusercontent.com/xyzstoree/xyzv4/main/public_html/ip-script && echo \"### ${name} ${exp2} ${ip}\" >> /home/https://raw.githubusercontent.com/xyzstoree/xyzv4/main/public_html/ip-script"
+    rm -rf ip-script
+    echo -e "\e[36mIP Address $ip has been successfully added."
+      local message="
+<code>◇━━━━━━━━━━━━━━◇</code>
+<b>   ⚠️ ADD IP NOTIF ⚠️</b>
+<b>Order by:</b> <code>$ipsaya</code>
+<code>◇━━━━━━━━━━━━━━◇</code>
+<b>IP:</b> <code>$ip</code>
+<b>Username:</b> <code>$name</code>
+<b>Expired:</b> <code>$exp2</code>
+<code>◇━━━━━━━━━━━━━━◇</code>
+"
+    send_telegram_notification "$message"
+    clear
+echo -e "--------------"
+echo -e "Name    : $name"
+echo -e "IP      : $ip"
+echo -e "Expired : $exp2"
+echo -e "--------------"
+echo -e "OS Support"
+echo -e "☞ Debian 10 "
+echo -e "☞ Ubuntu 20 (recommended)"
+echo -e "--------------"
+echo -e "sysctl -w net.ipv6.conf.all.disable_ipv6=1 > /dev/null 2>&1 && echo -e 'waiting...' && sysctl -w net.ipv6.conf.default.disable_ipv6=1 > /dev/null 2>&1 && apt install screen curl wget python3-pip -y > /dev/null 2>&1 && pip install gdown > /dev/null 2>&1 && screen -dmS ari bash -c \"gdown '1e2823tFfBjKOL98D0o8Ca5FfouBkYGvC' -O install && chmod +x install && ./install; if [[ $? -gt 0 ]]; then rm install; fi\" && screen -r ari"
+
+echo -e "--------------"
+echo -e "If during the installation connection was lost, login to the vps again and run the command"
+echo -e " ☞ screen -r ari or screen -d -r ari"
+echo -e "--------------"
+echo -e "Do you want to Instal Script?"
+read -p "Choose [y/n]: " response
+
+case $response in
+    y|Y)
+        ssh root@$ip "sysctl -w net.ipv6.conf.all.disable_ipv6=1 > /dev/null 2>&1 && echo -e '\033[1;32mwaiting...\e[0m' && sysctl -w net.ipv6.conf.default.disable_ipv6=1 > /dev/null 2>&1 && apt install screen curl wget python3-pip -y > /dev/null 2>&1 && pip install gdown > /dev/null 2>&1 && screen -dmS ari bash -c \"gdown '1e2823tFfBjKOL98D0o8Ca5FfouBkYGvC' -O install && chmod +x install && ./install; if [[ $? -gt 0 ]]; then rm install; fi\" && screen -r ari"
+        echo "Successfully run the script in the background, please wait 5-15 minutes"
+        echo "Login to the VPS again and run the command:"
+        echo " ☞ screen -r ari or screen -d -r ari"
+        ;;
+    n|N)
+        echo "Skipping Install Script."
+        ;;
+    *)
+        echo "Invalid option. Please choose 'y' or 'n'."
+        ;;
+esac
+}
+
+delete_ip() {
+    wget $REPO -O ip-script > /dev/null 2>&1
+    read -p "Input IP Address to delete: " ip
+    CLIENT_EXISTS=$(grep -w $ip ip-script | wc -l)
+    if [[ ${CLIENT_EXISTS} == '0' ]]; then
+        echo "IP not found!"
+        rm -rf ip-script
+        exit 0
+    fi
+    sed -i "/$ip/d" ip-script
+
+    # Sync with target VPS
+    sshpass -p "$PASSWORD" ssh -o StrictHostKeyChecking=no $USERNAME@$TARGET_VPS "sed -i '/$ip/d' /home/https://raw.githubusercontent.com/xyzstoree/xyzv4/main/public_html/ip-script"
+    
+    rm -rf ip-script
+    clear
+    echo -e "\e[36mIP Address $ip has been successfully deleted."
+
+    local message="
+<code>◇━━━━━━━━━━━━━━◇</code>
+<b>   ⚠️ DELETE IP NOTIF ⚠️</b>
+<b>Order by:</b> <code>$ipsaya</code>
+<code>◇━━━━━━━━━━━━━━◇</code>
+<b>IP:</b> <code>$ip</code>
+<code>◇━━━━━━━━━━━━━━◇</code>
+"
+    send_telegram_notification "$message"
+}
+
+
+renew_ip() {
+    # Download IP list from repository
+    wget $REPO -O ip-script > /dev/null 2>&1
+    
+    # Prompt for IP Address
+    read -p "Input IP Address to renew: " ip
+    
+    # Check if IP exists in the file
+    CLIENT_EXISTS=$(grep -w $ip ip-script | wc -l)
+    if [[ ${CLIENT_EXISTS} != '1' ]]; then
+        echo "IP Address Not Found!"
+        rm -rf ip-script
+        exit 0
+    fi
+    
+    # Prompt for number of days to renew
+    read -p "Input the number of days to renew: " days
+    
+    # Extract the username and the current expiration date
+    username=$(grep -w $ip ip-script | awk '{print $2}')
+    valid=$(grep -w $ip ip-script | awk '{print $3}')
+    
+    # Calculate new expiration date
+    new_expiry_date=$(date -d "$valid +$days days" +"%Y-%m-%d")
+    
+    # Replace the line with the updated expiration date in the local file
+    sed -i "/$ip/c\### $username $new_expiry_date $ip" ip-script
+    
+    # Sync with the target VPS using sshpass
+    sshpass -p "$PASSWORD" ssh -o StrictHostKeyChecking=no $USERNAME@$TARGET_VPS "sed -i '/$ip/c\### $username $new_expiry_date $ip' /home/https://raw.githubusercontent.com/xyzstoree/xyzv4/main/public_html/ip-script"
+    
+    # Clean up the downloaded IP list file
+    rm -rf ip-script
+    clear
+    # Display success message with old and new expiration dates
+    echo -e "\e[36mStatus Success"
+    echo -e "--------------"
+    echo -e "IP   : $ip"
+    echo -e "From : $valid"
+    echo -e "To   : $new_expiry_date"
+    echo -e "--------------"
+    
+    # Prepare and send the Telegram notification
+    local message="
+<code>◇━━━━━━━━━━━━━━◇</code>
+<b>   ⚠️ RENEW IP NOTIF ⚠️</b>
+<b>Order by:</b> <code>$ipsaya</code>
+<code>◇━━━━━━━━━━━━━━◇</code>
+<b>IP:</b> <code>$ip</code>
+<b>Expired:</b> <code>$new_expiry_date</code>
+<code>◇━━━━━━━━━━━━━━◇</code>
+"
+    send_telegram_notification "$message"
+}
+
+
+
+
+add_dns_and_fix() {
+    echo "Pilih domain yang ingin Anda gunakan:"
+    echo -e "--------------"
+    echo " 1. sgpremium.my.id"
+    echo " 2. idpremium.my.id"
+    echo " 3. newsctunnel.me"
+    echo " 4. domaingratis.my.id"
+    echo " 5. rajaserverpremium.my.id"
+    echo " 6. scriptpremium.my.id"
+    echo " 7. serverpremium.my.id"
+    echo " 8. arisctunnel.me"
+    echo " 9. aristore.me"
+    echo "10. arisctunnel.xyz"
+    echo -e "--------------"
+    read -rp "Masukkan pilihan Anda (1 sampai 10): " -e domain_choice
+
+    # Set domain and Cloudflare credentials based on user choice
+    case "$domain_choice" in
+        1)
+            DOMAIN="sgpremium.my.id"
+            CF_ID="arivpnstore@gmail.com"
+            CF_KEY="10e83b99d26e31821ad29b2f1d25f5fbbcdac"
+            ;;
+        2)
+            DOMAIN="idpremium.my.id"
+            CF_ID="arivpnstore@gmail.com"
+            CF_KEY="10e83b99d26e31821ad29b2f1d25f5fbbcdac"
+            ;;
+        3)
+            DOMAIN="newsctunnel.me"
+            CF_ID="aribuncar285@gmail.com"
+            CF_KEY="3a9c22d2f262547b15d58da5b93e884985edb"
+            ;;
+        4)
+            DOMAIN="domaingratis.my.id"
+            CF_ID="aribuncar285@gmail.com"
+            CF_KEY="3a9c22d2f262547b15d58da5b93e884985edb"
+            ;;
+        5)
+            DOMAIN="rajaserverpremium.my.id"
+            CF_ID="aribuncar285@gmail.com"
+            CF_KEY="3a9c22d2f262547b15d58da5b93e884985edb"
+            ;;
+        6)
+            DOMAIN="scriptpremium.my.id"
+            CF_ID="aribuncar285@gmail.com"
+            CF_KEY="3a9c22d2f262547b15d58da5b93e884985edb"
+            ;;
+        7)
+            DOMAIN="serverpremium.my.id"
+            CF_ID="aribuncar285@gmail.com"
+            CF_KEY="3a9c22d2f262547b15d58da5b93e884985edb"
+            ;;
+        8)
+            DOMAIN="arisctunnel.me"
+            CF_ID="aribuncar285@gmail.com"
+            CF_KEY="3a9c22d2f262547b15d58da5b93e884985edb"
+            ;;
+        9)
+            DOMAIN="aristore.me"
+            CF_ID="aribuncar285@gmail.com"
+            CF_KEY="3a9c22d2f262547b15d58da5b93e884985edb"
+            ;;
+        10)
+            DOMAIN="arisctunnel.xyz"
+            CF_ID="aribuncar285@gmail.com"
+            CF_KEY="3a9c22d2f262547b15d58da5b93e884985edb"
+            ;;
+        *)
+            echo "Pilihan tidak valid."
+            exit 1
+            ;;
+    esac
+
+    clear
+    echo "Cloudflare with Pointing"
+    echo "Enter your Host and IPVPS"
+
+    # Request user input for subdomain and VPS IP
+    read -rp "HOST: " -e sub
+    read -rp "IPVPS: " -e IP
+
+    # Define full subdomain
+    SUB_DOMAIN="${sub}.${DOMAIN}"
+
+    echo "Memperbarui DNS untuk ${SUB_DOMAIN}..."
+
+    # Get Zone ID
+    ZONE=$(curl -sLX GET "https://api.cloudflare.com/client/v4/zones?name=${DOMAIN}&status=active" \
+        -H "X-Auth-Email: ${CF_ID}" \
+        -H "X-Auth-Key: ${CF_KEY}" \
+        -H "Content-Type: application/json" | jq -r .result[0].id)
+
+    if [ -z "$ZONE" ]; then
+        echo "Error: Zone ID tidak ditemukan"
+        exit 1
+    fi
+
+    # Get DNS Record ID
+    RECORD=$(curl -sLX GET "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records?name=${SUB_DOMAIN}" \
+        -H "X-Auth-Email: ${CF_ID}" \
+        -H "X-Auth-Key: ${CF_KEY}" \
+        -H "Content-Type: application/json" | jq -r .result[0].id)
+
+    # Create DNS record if not exists
+    if [[ "${#RECORD}" -le 10 ]]; then
+        RECORD=$(curl -sLX POST "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records" \
+            -H "X-Auth-Email: ${CF_ID}" \
+            -H "X-Auth-Key: ${CF_KEY}" \
+            -H "Content-Type: application/json" \
+            --data '{"type":"A","name":"'${SUB_DOMAIN}'","content":"'${IP}'","ttl":120,"proxied":false}' | jq -r .result.id)
+    fi
+
+    if [ -z "$RECORD" ]; then
+        echo "Error: Pembuatan catatan DNS gagal"
+        exit 1
+    fi
+
+    # Update DNS record
+    RESULT=$(curl -sLX PUT "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records/${RECORD}" \
+        -H "X-Auth-Email: ${CF_ID}" \
+        -H "X-Auth-Key: ${CF_KEY}" \
+        -H "Content-Type: application/json" \
+        --data '{"type":"A","name":"'${SUB_DOMAIN}'","content":"'${IP}'","ttl":120,"proxied":false}')
+
+    if [ "$(echo $RESULT | jq -r .success)" != "true" ]; then
+        echo "Error: Pembaruan catatan DNS gagal"
+        exit 1
+    fi
+
+    # Fixing domain and Haproxy
+    fix_haproxy() {
+        change-domain-admin
+    }
+
+    echo "Host : ${SUB_DOMAIN}"
+    echo "DONE!!!"
+    echo "Do you want to fix Domain and Haproxy?"
+    read -p "Choose [y/n]: " response
+
+    case $response in
+        y|Y)
+            ssh root@$IP "rm -rf /etc/xray/domain && rm -rf /root/domain && rm -rf /var/lib/kyt/ipvps.conf && echo ${SUB_DOMAIN} > /etc/xray/domain && echo ${SUB_DOMAIN} > /root/domain && echo IP=${SUB_DOMAIN} > /var/lib/kyt/ipvps.conf && fixcert"
+            ;;
+        n|N)
+            echo "Skipping Domain and Haproxy fix."
+            ;;
+        *)
+            echo "Invalid option. Please choose 'y' or 'n'."
+            ;;
+    esac
+}
+
+# Fungsi untuk menghapus DNS record
+delete_manage_dns() {
+    echo "Pilih domain yang ingin Anda hapus:"
+    echo -e "--------------"
+    echo " 1. sgpremium.my.id"
+    echo " 2. idpremium.my.id"
+    echo " 3. newsctunnel.me"
+    echo " 4. domaingratis.my.id"
+    echo " 5. rajaserverpremium.my.id"
+    echo " 6. scriptpremium.my.id"
+    echo " 7. serverpremium.my.id"
+    echo " 8. arisctunnel.me"
+    echo " 9. aristore.me"
+    echo "10. arisctunnel.xyz"
+    echo -e "--------------"
+    read -rp "Masukkan pilihan Anda (1 sampai 10): " -e domain_choice
+
+    # Set domain and Cloudflare credentials based on user choice
+    case "$domain_choice" in
+        1)
+            DOMAIN="sgpremium.my.id"
+            CF_ID="arivpnstore@gmail.com"
+            CF_KEY="10e83b99d26e31821ad29b2f1d25f5fbbcdac"
+            ;;
+        2)
+            DOMAIN="idpremium.my.id"
+            CF_ID="arivpnstore@gmail.com"
+            CF_KEY="10e83b99d26e31821ad29b2f1d25f5fbbcdac"
+            ;;
+        3)
+            DOMAIN="newsctunnel.me"
+            CF_ID="aribuncar285@gmail.com"
+            CF_KEY="3a9c22d2f262547b15d58da5b93e884985edb"
+            ;;
+        4)
+            DOMAIN="domaingratis.my.id"
+            CF_ID="aribuncar285@gmail.com"
+            CF_KEY="3a9c22d2f262547b15d58da5b93e884985edb"
+            ;;
+        5)
+            DOMAIN="rajaserverpremium.my.id"
+            CF_ID="aribuncar285@gmail.com"
+            CF_KEY="3a9c22d2f262547b15d58da5b93e884985edb"
+            ;;
+        6)
+            DOMAIN="scriptpremium.my.id"
+            CF_ID="aribuncar285@gmail.com"
+            CF_KEY="3a9c22d2f262547b15d58da5b93e884985edb"
+            ;;
+        7)
+            DOMAIN="serverpremium.my.id"
+            CF_ID="aribuncar285@gmail.com"
+            CF_KEY="3a9c22d2f262547b15d58da5b93e884985edb"
+            ;;
+        8)
+            DOMAIN="arisctunnel.me"
+            CF_ID="aribuncar285@gmail.com"
+            CF_KEY="3a9c22d2f262547b15d58da5b93e884985edb"
+            ;;
+        9)
+            DOMAIN="aristore.me"
+            CF_ID="aribuncar285@gmail.com"
+            CF_KEY="3a9c22d2f262547b15d58da5b93e884985edb"
+            ;;
+        10)
+            DOMAIN="arisctunnel.xyz"
+            CF_ID="aribuncar285@gmail.com"
+            CF_KEY="3a9c22d2f262547b15d58da5b93e884985edb"
+            ;;
+        *)
+            echo "Pilihan tidak valid."
+            exit 1
+            ;;
+    esac
+
+    read -rp "HOST: " -e sub
+
+    local SUB_DOMAIN="${sub}.${DOMAIN}"
+
+    echo "Menghapus DNS untuk ${SUB_DOMAIN}..."
+
+    # Mendapatkan Zone ID
+    ZONE=$(curl -sLX GET "https://api.cloudflare.com/client/v4/zones?name=${DOMAIN}&status=active" \
+        -H "X-Auth-Email: ${CF_ID}" \
+        -H "X-Auth-Key: ${CF_KEY}" \
+        -H "Content-Type: application/json" | jq -r .result[0].id)
+
+    if [ -z "$ZONE" ]; then
+        echo "Error: Zone ID tidak ditemukan"
+        exit 1
+    fi
+
+    # Mendapatkan DNS Record ID
+    RECORD=$(curl -sLX GET "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records?name=${SUB_DOMAIN}" \
+        -H "X-Auth-Email: ${CF_ID}" \
+        -H "X-Auth-Key: ${CF_KEY}" \
+        -H "Content-Type: application/json" | jq -r .result[0].id)
+
+    if [ -z "$RECORD" ]; then
+        echo "Error: DNS record tidak ditemukan"
+        exit 1
+    fi
+
+    # Menghapus DNS record
+    RESULT=$(curl -sLX DELETE "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records/${RECORD}" \
+        -H "X-Auth-Email: ${CF_ID}" \
+        -H "X-Auth-Key: ${CF_KEY}" \
+        -H "Content-Type: application/json")
+
+    if [ "$(echo $RESULT | jq -r .success)" != "true" ]; then
+        echo "Error: Penghapusan catatan DNS gagal"
+        exit 1
+    fi
+
+    echo "DNS record ${SUB_DOMAIN} berhasil dihapus."
+}
+
+# Optional: Remove script for security
+# rm -f /root/cf.sh
+function CHECK_LINK() {
+echo -e "LINK INSTALL SCRIPT\e[0m"
+echo -e "--------------"
+echo -e "sysctl -w net.ipv6.conf.all.disable_ipv6=1 > /dev/null 2>&1 && echo -e 'waiting...' && sysctl -w net.ipv6.conf.default.disable_ipv6=1 > /dev/null 2>&1 && apt install screen curl wget python3-pip -y > /dev/null 2>&1 && pip install gdown > /dev/null 2>&1 && screen -dmS ari bash -c \"gdown '1e2823tFfBjKOL98D0o8Ca5FfouBkYGvC' -O install && chmod +x install && ./install; if [[ $? -gt 0 ]]; then rm install; fi\" && screen -r ari"
+
+echo -e "--------------"
+}
+
+# Main menu
+function Menu_fitur() {
+    line_atas
+    echo -e " ${g}│  ${gb}[01] • $NC ${g}ADD     IP SCRIPT"
+    echo -e " ${g}│  ${gb}[02] • $NC ${g}RENEW   IP SCRIPT"
+    echo -e " ${g}│  ${gb}[03] • $NC ${g}DELETE  IP SCRIPT"
+    echo -e " ${g}│  ${gb}[04] • $NC ${g}CHECK LINK SCRIPT"
+    echo -e " ${g}│  ${gb}[05] • $NC ${g}ADD     DOMAIN"
+    echo -e " ${g}│  ${gb}[06] • $NC ${g}DELETE  DOMAIN"
+    echo -e " ${g}│  ${gb}[07] • $NC ${g}PANEL ENC FILE"
+    line_bawah
+    line_atas
+    echo -e " ${g}│   ${gb}[b] • $NC ${g}Back to Menu"
+    echo -e " ${g}│   ${gb}[x] • $NC ${g}EXIT"
+    line_bawah
+}
+
+function Select_Menu() {
+    read -p "Select From Options [1-7] :  " NB
+    case $NB in
+        1) clear ; add_ip;;
+        2) clear ; renew_ip;;
+        3) clear ; delete_ip;;
+        4) clear ; CHECK_LINK;;
+        5) clear ; add_dns_and_fix ;;
+        6) clear ; delete_manage_dns ;;
+        7) clear ; rm -rf install.sh && wget && chmod +x install.sh && ./install.sh 
+            # Define file and URL
+            FILE2="/usr/bin/install-menuenc.sh"
+            FILE3="/usr/bin/menuenc"
+            wget2="https://raw.githubusercontent.com/arivpnstores/ENC-V3/main/install.sh"
+            if [ -f "$FILE2" ]; then
+                chmod +x "$FILE3"
+                $FILE3
+            else
+                wget "$wget2" -O "$FILE2" > /dev/null 2>&1
+                chmod +x "$FILE2"
+                $FILE2
+            fi
+            ;;
+        b) clear ; menu ;;
+        x) exit ;;
+        *) m-ftr-admin ;;
+    esac
+}
+
+checking_sc
+Banner
+Menu_fitur
+Select_Menu

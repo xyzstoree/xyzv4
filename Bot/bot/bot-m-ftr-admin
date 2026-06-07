@@ -1,0 +1,6 @@
+#!/bin/bash
+            echo "📌 BotSC TUNNEL:"
+            echo "https://t.me/ARI_BotSC_bot"
+            echo "=============================="
+            read -rp "Press Enter to return to menu..."
+            menu

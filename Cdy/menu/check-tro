@@ -1,0 +1,216 @@
+#!/bin/bash
+clear
+
+yellow="\033[0;33m"
+ungu="\033[0;35m"
+Red="\033[91;1m"
+Xark="\033[0m"
+BlueCyan="\033[5;36m"
+WhiteBe="\033[5;37m"
+GreenBe="\033[5;32m"
+YellowBe="\033[5;33m"
+BlueBe="\033[5;34m"
+
+
+# . Liner 
+function baris_panjang() {
+   echo -e "\033[5;36m ———————————————————————————————————————————————\033[0m"
+}
+
+function ARI_Banner() {
+baris_panjang
+NAMASC="ARISCTUNNEL V4"
+function center_text() {
+    local text="$1"
+    local width=50  # Sesuaikan dengan panjang baris yang diinginkan
+
+    # Hapus kode warna untuk menghitung panjang sebenarnya dari teks
+    local plain_text=$(echo -e "$text" | sed 's/\x1b\[[0-9;]*m//g')
+    local len=${#plain_text}
+    local spaces=$(( (width - len) / 2 ))
+
+    # Tampilkan teks dengan warna dan centering yang benar
+    printf "%${spaces}s%s\033[0m\n" "" "$(echo -e "$text")"
+}
+# Kombinasi warna untuk ".::." dan "ARISCTUNNEL V4"
+formatted_text="\e[36m.::.\033[0;35m $NAMASC \e[36m.::."
+# Tampilkan teks yang diformat
+center_text "$formatted_text"
+baris_panjang
+echo "     "
+echo -e       "\033[0;35m                   XRAY TROJAN                  \033[0m"
+baris_panjang
+}
+
+function Sc_Credit(){
+baris_panjang
+function center_text() {
+    local text="$1"
+    local width=50  # Sesuaikan dengan panjang baris yang diinginkan
+
+    # Hapus kode warna untuk menghitung panjang sebenarnya dari teks
+    local plain_text=$(echo -e "$text" | sed 's/\x1b\[[0-9;]*m//g')
+    local len=${#plain_text}
+    local spaces=$(( (width - len) / 2 ))
+
+    # Tampilkan teks dengan warna dan centering yang benar
+    printf "%${spaces}s%s\033[0m\n" "" "$(echo -e "$text")"
+}
+# Kombinasi warna untuk ".::." dan "ARISCTUNNEL V4"
+formatted_text="\033[0;35m Terimakasih sudah menggunakan- \033[0m"
+formatted_text1="\033[0;35m Script Credit By $NAMASC \033[0m"
+# Tampilkan teks yang diformat
+center_text "$formatted_text"
+center_text "$formatted_text1"
+baris_panjang
+echo ""
+read -rp "press any key for back"
+m-tro
+}
+
+duration=3
+frames=("██10%" "█████35%" "█████████65%" "█████████████80%" "█████████████████████90%" "█████████████████████████100%")
+
+# Menghitung jumlah frame
+num_frames=${#frames[@]}
+
+# Menghitung jumlah iterasi
+num_iterations=$((duration))
+
+# Fungsi untuk menampilkan animasi loading berwarna
+
+Loading_Animasi() {
+    for ((i = 0; i < num_iterations; i++)); do
+        clear
+        index=$((i % num_frames))
+        color_code=$((31 + i % 7))
+echo ""
+echo ""
+echo ""
+echo -e "\e[1;${color_code}m ${frames[$index]}\e[0m"
+sleep 0.5
+    done
+}
+
+# Menjalankan animasi loading
+loading() {
+  local pid=$1
+  local delay=0.1
+  local spin='-\|/'
+
+  while ps -p $pid > /dev/null; do
+    local temp=${spin#?}
+    printf "[%c] " "$spin"
+    local spin=$temp${spin%"$temp"}
+    sleep $delay
+    printf "\b\b\b\b\b\b"
+  done
+
+  printf "    \b\b\b\b"
+}
+
+# Menampilkan pesan setelah animasi selesai
+function Loading_Succes() {
+clear
+echo -e  "\033[5;32mSucces\033[0m"
+sleep 2
+clear
+}
+
+
+#function Daftar_Member_Trojan {
+#    baris_panjang
+#    echo ""
+ # 	grep -E "^#! " "/etc/xray/config.json" | cut -d ' ' -f 2-3 | column -t | sort | uniq | lolcat
+#    echo ""
+#baris_panjang
+#echo ""
+#}
+
+function Cek_Config_Trojan() {
+    echo " Select the existing client you want to check"
+    echo " Press CTRL+C to return"
+    baris_panjang
+    options=($(grep -E "^#! " "/etc/xray/config.json" | cut -d ' ' -f 2 | sort | uniq))
+    max_options=${#options[@]}
+    
+    for i in "${!options[@]}"; do
+        printf "   %2d) %s\n" $((i+1)) "${options[$i]}"
+    done
+    
+    echo ""
+    read -rp "Select one client [1-$max_options] or [user] : " input
+    
+    if [[ $input =~ ^[0-9]+$ ]]; then
+        index=$((input-1))
+        if [[ $index -ge 0 && $index -lt ${#options[@]} ]]; then
+            user=${options[$index]}
+        else
+            echo "Nomor tidak valid!"
+            return
+        fi
+    else
+        user=$input
+    fi
+
+    if [[ -z $user ]]; then
+        echo -e "User Tidak Ditemukan!!!"
+        read -n 1 -s -r -p "Enter Back To Menu"
+m-tro
+else
+CITY=$(cat /etc/xray/city)
+ISP=$(cat /etc/xray/isp)
+domain=$(cat /etc/xray/domain)
+iplimit=$(cat /etc/kyt/limit/trojan/ip/$user)
+Quota1=$(cat /etc/trojan/$user)
+Quota=$((Quota1 / 1024 / 1024 / 1024))
+uuid=$(grep -E "^},{" "/etc/xray/config.json" |  grep -i '"'"${user}"'"' | cut -d " " -f 2 | cut -d '"' -f 2 | uniq )
+exp=$(grep -E "^#! " "/etc/xray/config.json" | grep -i ' '"${user}"' ' | cut -d ' ' -f 3 | uniq )
+trojanlink1="trojan://${uuid}@${domain}:443?mode=gun&security=tls&type=grpc&serviceName=trojan-grpc&sni=bug.com#${user}"
+trojanlink="trojan://${uuid}@bugkamu.com:443?path=%2Ftrojan-ws&security=tls&host=${domain}&type=ws&sni=${domain}#${user}"
+trojanlink2="trojan://${uuid}@${domain}:80?path=%2Ftrojan-ws&security=none&host=${domain}&type=ws#${user}"
+
+fi
+}
+
+function Details_Account() {
+baris_panjang
+echo -e       "\033[0;35m                   XRAY TROJAN                  \033[0m"
+baris_panjang
+echo -e "\033[37m Remarks      : ${user} \033[0m" 
+echo -e "\033[37m Host/IP      : ${domain} \033[0m"
+echo -e "\033[37m User Quota   : ${Quota} GB \033[0m"
+echo -e "\033[37m User Ip      : ${iplimit} IP \033[0m"
+echo -e "\033[37m Port NTLS    : 443-900 \033[0m" 
+echo -e "\033[37m port WS      : 80,8880,8080 \033[0m"
+echo -e "\033[37m Key          : ${uuid} \033[0m"
+echo -e "\033[37m ISP          : $ISP \033[0m"
+echo -e "\033[37m Path         : /trojan-ws \033[0m" 
+echo -e "\033[37m ServiceName  : trojan-grpc \033[0m"
+baris_panjang
+}
+
+function Link_Json() {
+echo -e "\033[37m Link WS     : ${trojanlink} \033[0m" 
+baris_panjang
+echo -e "\033[37m Link TLS    : ${trojanlink2} \033[0m" 
+baris_panjang 
+echo -e "\033[37m Link GRPC   : ${trojanlink1} \033[0m" 
+baris_panjang
+echo -e "\033[37m OpenClash   : https://${domain}:81/trojan-$user.txt \033[0m" 
+}
+
+function Details_Expiry() {
+baris_panjang
+echo -e "\033[33m Expiry     : $exp \033[0m "
+}
+ARI_Banner
+echo "     "
+Cek_Config_Trojan
+clear
+sleep 3 & loading $!
+Loading_Succes
+Details_Account
+Link_Json
+Details_Expiry
+Sc_Credit

@@ -1,0 +1,124 @@
+#!/bin/bash
+yellow="\033[0;33m"
+ungu="\033[0;35m"
+Red="\033[91;1m"
+Xark="\033[0m"
+BlueCyan="\033[5;36m"
+Cyan="\033[96;1m"
+Purple="\033[95;1m"
+Green="\033[92;1m"
+WhiteBe="\033[5;37m"
+GreenBe="\033[5;32m"
+YellowBe="\033[5;33m"
+BlueBe="\033[5;34m"
+nama=$(cat /etc/xray/username)
+# . Liner 
+function baris_panjang() {
+   echo -e "\033[5;36m ———————————————————————————————————————————————\033[0m"
+}
+
+function ARI_Banner() {
+baris_panjang
+NAMASC="ARISCTUNNEL V4"
+function center_text() {
+    local text="$1"
+    local width=50  # Sesuaikan dengan panjang baris yang diinginkan
+
+    # Hapus kode warna untuk menghitung panjang sebenarnya dari teks
+    local plain_text=$(echo -e "$text" | sed 's/\x1b\[[0-9;]*m//g')
+    local len=${#plain_text}
+    local spaces=$(( (width - len) / 2 ))
+
+    # Tampilkan teks dengan warna dan centering yang benar
+    printf "%${spaces}s%s\033[0m\n" "" "$(echo -e "$text")"
+}
+# Kombinasi warna untuk ".::." dan "ARISCTUNNEL V4"
+formatted_text="\e[36m.::.\033[0;35m $NAMASC \e[36m.::."
+# Tampilkan teks yang diformat
+center_text "$formatted_text"
+baris_panjang
+}
+
+function Sc_Credit(){
+sleep 1
+baris_panjang
+function center_text() {
+    local text="$1"
+    local width=50  # Sesuaikan dengan panjang baris yang diinginkan
+
+    # Hapus kode warna untuk menghitung panjang sebenarnya dari teks
+    local plain_text=$(echo -e "$text" | sed 's/\x1b\[[0-9;]*m//g')
+    local len=${#plain_text}
+    local spaces=$(( (width - len) / 2 ))
+
+    # Tampilkan teks dengan warna dan centering yang benar
+    printf "%${spaces}s%s\033[0m\n" "" "$(echo -e "$text")"
+}
+# Kombinasi warna untuk ".::." dan "ARISCTUNNEL V4"
+formatted_text="\033[0;35m Terimakasih sudah menggunakan- \033[0m"
+formatted_text1="\033[0;35m Script Credit By $NAMASC \033[0m"
+# Tampilkan teks yang diformat
+center_text "$formatted_text"
+center_text "$formatted_text1"
+baris_panjang
+}
+
+duration=6
+frames=("██10%" "█████35%" "█████████65%" "█████████████80%" "█████████████████████90%" "█████████████████████████100%")
+
+# Menghitung jumlah frame
+num_frames=${#frames[@]}
+
+# Menghitung jumlah iterasi
+num_iterations=$((duration))
+
+# Fungsi untuk menampilkan animasi loading berwarna
+
+Loading_Animasi() {
+    for ((i = 0; i < num_iterations; i++)); do
+        clear
+        index=$((i % num_frames))
+        color_code=$((31 + i % 7))
+echo ""
+echo ""
+echo ""
+echo -e "\e[1;${color_code}m ${frames[$index]}\e[0m"
+sleep 0.5
+    done
+}
+
+# Menjalankan animasi loading
+loading() {
+  local pid=$1
+  local delay=0.1
+  local spin='-\|/'
+
+  while ps -p $pid > /dev/null; do
+    local temp=${spin#?}
+    printf "[%c] " "$spin"
+    local spin=$temp${spin%"$temp"}
+    sleep $delay
+    printf "\b\b\b\b\b\b"
+  done
+
+  printf "    \b\b\b\b"
+}
+
+# Menampilkan pesan setelah animasi selesai
+function Loading_Succes() {
+clear
+echo -e  "\033[5;32mSucces\033[0m"
+sleep 1
+clear
+}
+
+
+clear
+ARI_Banner
+baris_panjang
+	
+	grep -E "^#! " "/etc/xray/config.json" | cut -d ' ' -f 2-3 | column -t | sort | uniq
+    echo ""
+    
+baris_panjang
+Sc_Credit
