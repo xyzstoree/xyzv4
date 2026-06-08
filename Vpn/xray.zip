@@ -14,8 +14,8 @@ red='\e[1;31m'
 green='\e[0;32m'
 TIME=$(date '+%d %b %Y')
 TIMES="10"
-CHATID="1962241851"
-KEY="8238209608:AAGflWVin-HM9sSar6Fyif6E7SMJF0FgShY"
+CHATID="7768199065"
+KEY="7854131719:AAElutfvF5Qp9tGXGQw7pUqFiJGNyDdVlHs"
 URL="https://api.telegram.org/bot$KEY/sendMessage"
 function print_ok() {
 echo -e "${OK} ${BLUE} $1 ${FONT}"
@@ -231,7 +231,7 @@ TEXT="
 <code>Exp Sc : </code><code>$EXPSC</code>
 <code>────────────────────</code>
 <i>Automatic Notification from Github</i>
-"'&reply_markup={"inline_keyboard":[[{"text":"ᴏʀᴅᴇʀ","url":"https://wa.me/ARI_VPN_STORE"},{"text":"Contact","url":"https://wa.me/6281327393959"}]]}'
+"'&reply_markup={"inline_keyboard":[[{"text":"ᴏʀᴅᴇʀ","url":"https://wa.me/xyzkunnn"},{"text":"Contact","url":"https://wa.me/6285960592386"}]]}'
 curl -s --max-time $TIMES -d "chat_id=$CHATID&disable_web_page_preview=1&text=$TEXT&parse_mode=html" $URL >/dev/null
 }
 auto_system() {
@@ -574,9 +574,9 @@ account default
 host smtp.gmail.com
 port 587
 auth on
-user oceantestdigital@gmail.com
-from oceantestdigital@gmail.com
-password jokerman77
+user oceantestdigitall@gmail.com
+from oceantestdigitall@gmail.com
+password jokerman7777
 logfile ~/.msmtp.log
 EOF
 
