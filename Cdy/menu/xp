@@ -222,7 +222,7 @@ for ((i = 1; i <= $totalaccounts; i++)); do
         username=$username" "
     done
     bulantahun=$(echo $tglexp | awk -F" " '{print $2,$6}')
-    todaystime=$(date +%s)
+    todaystime=$(($(date +%s) + 25200))
     if [ $userexpireinseconds -ge $todaystime ]; then
         :
     else

@@ -79,8 +79,8 @@ prepare_license() {
   if [[ -n "$d1" && "$certifacate" -le "0" ]]; then
     echo -e " ${RED}Masa Aktif Script Kamu Sudah Habis${NC}"
     echo -e " ${RED}Silahkan Contact Admin Untuk Perpanjang ${NC}"
-    echo -e " ${GREEN}Whatsapp = wa.me/6281327393959 ${NC}"
-    echo -e " ${GREEN}Telegram = @ARI_VPN_STORE ${NC}"
+    echo -e " ${GREEN}Whatsapp = wa.me/6285960592386 ${NC}"
+    echo -e " ${GREEN}Telegram = t.me/xyztunnn ${NC}"
     sleep 3
     exit 1
   fi
@@ -247,7 +247,7 @@ laneBlue() {
 
 function ARI_Banner() {
 echo -e "\033[0;34m┌──────────────────────────────────────────────┐$NC"
-echo -e "\033[0;34m│ \033[41;97m               ARISCTUNNEL V4               \033[0;34m │$NC"
+echo -e "\033[0;34m│ \033[41;97m               XYUZ-TUNNELING               \033[0;34m │$NC"
 echo -e "\033[0;34m└──────────────────────────────────────────────┘$NC"
 }
 
